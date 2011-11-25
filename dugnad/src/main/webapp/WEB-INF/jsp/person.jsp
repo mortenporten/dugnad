@@ -1,0 +1,57 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html>
+<head>
+    <title>Spring 3 MVC Series - Contact Manager | viralpatel.net</title>
+</head>
+<body>
+ 
+<h2>Contact Manager</h2>
+ 
+<form:form method="post" action="add.html" commandName="contact">
+ 
+    <table>
+    <tr>
+        <td><form:label path="name"><spring:message code="label.firstname"/></form:label></td>
+        <td><form:input path="name" /></td>
+    </tr>
+   
+    <tr>
+        <td><form:label path="email"><spring:message code="label.email"/></form:label></td>
+        <td><form:input path="email" /></td>
+    </tr>
+    <tr>
+        <td><form:label path="telephone"><spring:message code="label.telephone"/></form:label></td>
+        <td><form:input path="telephone" /></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="add"/>
+        </td>
+    </tr>
+</table>
+</form:form>
+ 
+<h3>Contacts</h3>
+<c:if  test="${!empty persons}">
+<table class="data">
+<tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Telephone</th>
+    <th>&nbsp;</th>
+</tr>
+<c:forEach items="${persons}" var="contact">
+    <tr>
+        <td>${person.name} </td>
+        <td>${person.email}</td>
+        <td>${person.telephone}</td>
+        <td><a href="delete/${person.id}">delete</a></td>
+    </tr>
+</c:forEach>
+</table>
+</c:if>
+ 
+</body>
+</html>
