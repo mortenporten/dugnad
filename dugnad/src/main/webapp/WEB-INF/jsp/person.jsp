@@ -9,20 +9,20 @@
  
 <h2>Contact Manager</h2>
  
-<form:form method="post" action="add.html" commandName="contact">
+<form:form method="post" action="add.html" commandName="person">
  
     <table>
     <tr>
-        <td><form:label path="name"><spring:message code="label.firstname"/></form:label></td>
+        <td><form:label path="name">navn</form:label></td>
         <td><form:input path="name" /></td>
     </tr>
    
     <tr>
-        <td><form:label path="email"><spring:message code="label.email"/></form:label></td>
+        <td><form:label path="email">epost</form:label></td>
         <td><form:input path="email" /></td>
     </tr>
     <tr>
-        <td><form:label path="telephone"><spring:message code="label.telephone"/></form:label></td>
+        <td><form:label path="telephone">telefon</form:label></td>
         <td><form:input path="telephone" /></td>
     </tr>
     <tr>
@@ -42,12 +42,12 @@
     <th>Telephone</th>
     <th>&nbsp;</th>
 </tr>
-<c:forEach items="${persons}" var="contact">
+<c:forEach items="${persons}" var="p">
     <tr>
-        <td>${person.name} </td>
-        <td>${person.email}</td>
-        <td>${person.telephone}</td>
-        <td><a href="delete/${person.id}">delete</a></td>
+        <td>${p.name} </td>
+        <td>${p.email}</td>
+        <td>${p.telephone}</td>
+        <td><a href="delete/${p.personId}">delete</a></td>
     </tr>
 </c:forEach>
 </table>

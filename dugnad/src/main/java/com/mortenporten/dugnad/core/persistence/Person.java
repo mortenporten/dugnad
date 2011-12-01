@@ -17,7 +17,7 @@ public class Person implements java.io.Serializable {
 	
 	private Integer personId;
 	private String name;
-	private int telephone;
+	private String telephone;
 	private String email;
 	
 
@@ -44,12 +44,12 @@ public class Person implements java.io.Serializable {
 	}
 	
 	@Column(name = "Telephone", length = 8)
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
 
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
