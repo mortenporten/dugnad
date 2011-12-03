@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.Email;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 
@@ -53,6 +56,7 @@ public class Person implements java.io.Serializable {
 		this.telephone = telephone;
 	}
 
+	@Email(message = "email is wrong")
 	@Column(name = "Email")
 	public String getEmail() {
 		return email;

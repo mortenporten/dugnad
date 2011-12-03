@@ -2,6 +2,8 @@ package com.mortenporten.dugnad.core.controllers;
 
 import java.util.Map;
 
+import javax.validation.Valid;
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import com.mortenporten.dugnad.core.bo.PersonBo;
 import com.mortenporten.dugnad.core.persistence.Person;
 
 @Controller
+@RequestMapping("/person/*")
 public class PersonController {
 
 	@Autowired
@@ -25,24 +28,28 @@ public class PersonController {
 	 
 	    
 	 
-	    @RequestMapping("/index") 
+	    @RequestMapping("/persons") 
 	    public String listPersons(Map<String, Object> map) {
 	 
 	        map.put("persons",personBo.findAllPersons());
 	        map.put("person", new Person());
 	        
 	 
-	        return "person";
+	        return "persons";
 	    }
 	    
 	    @RequestMapping(value = "/add", method = RequestMethod.POST)
-	    public String addPerson(@ModelAttribute("person")
+	    public String addPerson(@Valid @ModelAttribute("person")
 	    Person person, BindingResult result) {
-	 
+	    	
+	    	 if(result.hasErrors())  
+	    	    {  
+	    	        return "persons";  
+	    	    } 
 	    	
 	        personBo.addPerson(person);
 	 
-	        return "redirect:/index";
+	        return "redirect:persons";
 	    }
 	    
 	    @RequestMapping("/delete/{personId}")
@@ -51,7 +58,7 @@ public class PersonController {
 	 
 	       personBo.deletePerson(personId);
 	 
-	        return "redirect:/index";
+	        return "redirect:/person/persons";
 	    }
 	    
 	

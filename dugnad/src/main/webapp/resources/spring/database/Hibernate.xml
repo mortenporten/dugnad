@@ -22,6 +22,8 @@ class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
     <property name="annotatedClasses">
 	<list>
 		<value>com.mortenporten.dugnad.core.persistence.Person</value>
+		<value>com.mortenporten.dugnad.core.persistence.Festival</value>
+		<value>com.mortenporten.dugnad.core.persistence.Duty</value>
 	</list>
     </property>
  

@@ -19,7 +19,7 @@
    
     <tr>
         <td><form:label path="email">epost</form:label></td>
-        <td><form:input path="email" /></td>
+        <td><form:input path="email" /></td><td><form:errors path="email" /></td>
     </tr>
     <tr>
         <td><form:label path="telephone">telefon</form:label></td>

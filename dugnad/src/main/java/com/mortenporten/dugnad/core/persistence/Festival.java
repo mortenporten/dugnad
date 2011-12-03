@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity(name = "festival")
+@Entity(name = "Festival")
 public class Festival implements Serializable {
 
 	
@@ -38,7 +38,7 @@ public class Festival implements Serializable {
 		this.festivalName = festivalName;
 	}
 	
-	@OneToMany(mappedBy="duty")
+	@OneToMany()
 	public Collection<Duty> getDuties() {
 		return duties;
 	}
