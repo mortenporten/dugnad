@@ -18,7 +18,7 @@
     </tr>
    
     <tr>
-        <td><form:label path="email">epost</form:label></td>
+        <td><form:label path="email"><spring:message code="label.email"/></form:label></td>
         <td><form:input path="email" /></td><td><form:errors path="email" /></td>
     </tr>
     <tr>

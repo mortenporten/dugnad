@@ -56,7 +56,7 @@ public class Person implements java.io.Serializable {
 		this.telephone = telephone;
 	}
 
-	@Email(message = "email is wrong")
+	@Email
 	@Column(name = "Email")
 	public String getEmail() {
 		return email;
