@@ -27,7 +27,7 @@ public class DutyDaoImpl extends CustomHibernateDAOsupport implements DutyDao {
 	@Override
 	public Duty findDutyById(String id) {
 		List list = getHibernateTemplate().find(
-                "from duty where Id=?",id
+                "from Duty where Id=?",id
            );
 			return (Duty)list.get(0);
 	}

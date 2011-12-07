@@ -18,18 +18,21 @@ public class FestivalBoImpl implements FestivalBo {
 	FestivalDao festivalDao;
 	
 	@Override
+	@Transactional
 	public void addFestival(Festival festival) {
 		festivalDao.addFestival(festival);
 		
 	}
 
 	@Override
+	@Transactional
 	public void deleteFestival(String festivalId) {
 		festivalDao.deleteFestival(festivalId);
 		
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Festival> getAllFestivals() {
 		return festivalDao.getAllFestivals();
 	}
@@ -42,12 +45,14 @@ public class FestivalBoImpl implements FestivalBo {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Festival findFestivalById(String id) {
 		
 		return festivalDao.findFestivalById(id);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Festival findFestivalByName(String festivalName) {
 		return festivalDao.findFestivalByName(festivalName);
 	}

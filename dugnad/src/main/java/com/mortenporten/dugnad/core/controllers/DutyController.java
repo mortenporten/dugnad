@@ -46,7 +46,8 @@ public class DutyController {
     	
     	 if(result.hasErrors())  
     	    {  
-    	        return "duties";  
+    	     System.out.printf("%s",result.getAllErrors());   
+    		 return "duties";  
     	    } 
     	
     	 
@@ -55,5 +56,15 @@ public class DutyController {
     	festivalBo.addDuty(Integer.toString(festival.getFestivalId()), duty);
     	
         return "redirect:duties";
+    }
+	
+	@RequestMapping("/delete/{dutyId}")
+    public String deleteContact(@PathVariable("dutyId")
+    String dutyId, @PathVariable("festivalName")
+    String festivalName) {
+ 
+		dutyBo.deleteDuty(dutyId);
+ 
+        return "redirect:/" + festivalName + "/duty/duties";
     }
 }

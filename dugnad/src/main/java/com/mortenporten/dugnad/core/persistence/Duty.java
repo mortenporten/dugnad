@@ -42,7 +42,7 @@ public class Duty implements Serializable{
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "start")
-	@DateTimeFormat(pattern = "dd-MM-yy kk:mm")
+	@DateTimeFormat(pattern = "dd-MM-yy HH:mm")
 	public Calendar getStart() {
 		return start;
 	}
@@ -51,7 +51,7 @@ public class Duty implements Serializable{
 		this.start = start;
 	}
 	
-	@DateTimeFormat(pattern = "dd-MM-yy kk:mm")
+	@DateTimeFormat(pattern = "dd-MM-yy HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "End")
 	public Calendar getEnd() {
