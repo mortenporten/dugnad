@@ -23,7 +23,7 @@
     </tr>
     <tr>
         <td><form:label path="telephone">telefon</form:label></td>
-        <td><form:input path="telephone" /></td>
+        <td><form:input path="telephone" /></td><td><form:errors path="telephone" /></td>
     </tr>
     <tr>
         <td colspan="2">

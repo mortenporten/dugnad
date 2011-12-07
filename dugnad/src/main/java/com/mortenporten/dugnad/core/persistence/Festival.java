@@ -10,8 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
-@Entity(name = "Festival")
+import org.hibernate.validator.constraints.NotBlank;
+
+@Entity
+@Table(name = "Festival", uniqueConstraints = @UniqueConstraint(columnNames="Name"))
 public class Festival implements Serializable {
 
 	
@@ -30,7 +36,8 @@ public class Festival implements Serializable {
 		this.festivalId = festivalId;
 	}
 	
-	@Column(name = "Name")
+	@NotBlank
+	@Column(name = "Name", unique = true, nullable = false)
 	public String getFestivalName() {
 		return festivalName;
 	}

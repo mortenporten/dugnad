@@ -3,7 +3,9 @@ package com.mortenporten.dugnad.core.persistence;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,18 +13,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity(name = "duty")
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity(name = "Duty")
 public class Duty implements Serializable{
 
 	private Integer dutyId;
-	private Date start;
-	private Date end;
+	private Calendar start;
+	private Calendar end;
 	private Integer hours;
-	private Festival festival;
+	private Festival festival; 
+	private Collection<Person> persons;
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -36,25 +42,27 @@ public class Duty implements Serializable{
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "start")
-	public Date getStart() {
+	@DateTimeFormat(pattern = "dd-MM-yy kk:mm")
+	public Calendar getStart() {
 		return start;
 	}
 	
-	public void setStart(Date start) {
+	public void setStart(Calendar start) {
 		this.start = start;
 	}
 	
+	@DateTimeFormat(pattern = "dd-MM-yy kk:mm")
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "end")
-	public Date getEnd() {
+	@Column(name = "End")
+	public Calendar getEnd() {
 		return end;
 	}
 	
-	public void setEnd(Date end) {
+	public void setEnd(Calendar end) {
 		this.end = end;
 	}
 	
-	@Column(name = "hours")
+	@Column(name = "Hours")
 	public Integer getHours() {
 		return hours;
 	}
@@ -68,10 +76,18 @@ public class Duty implements Serializable{
 	public Festival getFestival() {
 		return festival;
 	}
+	
 	public void setFestival(Festival festival) {
 		this.festival = festival;
 	}
 	
+	@ManyToMany
+	public Collection<Person> getPersons() {
+		return persons;
+	}
 	
+	public void setPersons(Collection<Person> persons) {
+		this.persons = persons;
+	}
 	
 }

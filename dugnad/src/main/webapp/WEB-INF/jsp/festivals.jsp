@@ -15,6 +15,7 @@
     <tr>
         <td><form:label path="festivalName">navn</form:label></td>
         <td><form:input path="festivalName" /></td>
+        <td><form:errors path="festivalName" /></td>
     </tr>
    
   
@@ -34,7 +35,8 @@
 </tr>
 <c:forEach items="${festivals}" var="f">
     <tr>
-        <td>${f.festivalName} </td>
+        <td><a href="choose/${f.festivalName}">${f.festivalName}</a> </td>
+        <td><a href="delete/${f.festivalId}">delete</a></td>
     </tr>
 </c:forEach>
 </table>
