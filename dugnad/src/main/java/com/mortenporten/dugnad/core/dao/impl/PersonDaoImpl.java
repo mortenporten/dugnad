@@ -42,6 +42,12 @@ public class PersonDaoImpl extends CustomHibernateDAOsupport implements PersonDa
 		
 	}
 
+	@Override
+	public void updatePerson(Person person) {
+		getHibernateTemplate().update(person);
+		
+	}
+
 	
 	
 }

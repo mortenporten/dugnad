@@ -21,7 +21,7 @@ public class DutyDaoImpl extends CustomHibernateDAOsupport implements DutyDao {
 	@Override
 	public void deleteDuty(String id) {
 		getHibernateTemplate().delete(findDutyById(id));
-		
+
 	}
 
 	@Override
@@ -39,5 +39,13 @@ public class DutyDaoImpl extends CustomHibernateDAOsupport implements DutyDao {
            );
 			return list;
 	}
+
+	@Override
+	public void updateDuty(Duty duty) {
+		getHibernateTemplate().update(duty);
+		
+	}
+	
+	
 
 }

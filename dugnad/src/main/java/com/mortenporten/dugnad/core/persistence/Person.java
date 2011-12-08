@@ -2,11 +2,16 @@ package com.mortenporten.dugnad.core.persistence;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 
@@ -27,7 +32,8 @@ public class Person implements java.io.Serializable {
 	private String name;
 	private String telephone;
 	private String email;
-	private Collection<Duty> duties;
+	//private Collection<Duty> duties;
+	private Duty duty;
 
 
 	@Id
@@ -74,15 +80,31 @@ public class Person implements java.io.Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	public Duty getDuty() {
+		return duty;
+	}
+
+
+	public void setDuty(Duty duty) {
+		this.duty = duty;
+	}
+
+	/*@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Duty_Person", joinColumns = { @JoinColumn(name = "personId") }, inverseJoinColumns = { @JoinColumn(name = "dutyId") })*/
 	
-	@ManyToMany(mappedBy = "persons")
-	public Collection<Duty> getDuties() {
+	/*public Collection<Duty> getDuties() {
 		return duties;
 	}
 
 
 	public void setDuties(Collection<Duty> duties) {
 		this.duties = duties;
-	}
+	}*/
+	
+	
+	
+	
 	
 }

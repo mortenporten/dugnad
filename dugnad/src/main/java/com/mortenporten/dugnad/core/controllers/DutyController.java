@@ -46,8 +46,7 @@ public class DutyController {
     	
     	 if(result.hasErrors())  
     	    {  
-    	     System.out.printf("%s",result.getAllErrors());   
-    		 return "duties";  
+    	       return "duties";  
     	    } 
     	
     	 

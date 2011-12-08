@@ -13,6 +13,7 @@ public interface DutyDao {
 	void deleteDuty(String id);
 	Duty findDutyById(String id);
 	List<Duty> getAllDuties();
+	void updateDuty(Duty duty);
 	
 
 }

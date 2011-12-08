@@ -2,6 +2,7 @@ package com.mortenporten.dugnad.core.dao;
 
 import java.util.List;
 
+import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Person;
 
 public interface PersonDao {
@@ -13,5 +14,7 @@ public interface PersonDao {
 	public void addPerson(Person person);
 	
 	public void deletePerson(String id);
+	
+	void updatePerson(Person person);
 	
 }
