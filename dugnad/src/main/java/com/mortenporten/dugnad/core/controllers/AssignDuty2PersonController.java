@@ -46,11 +46,7 @@ public class AssignDuty2PersonController {
     		String festivalName ,@ModelAttribute("person")
     		Person person, Map<String, Object> map) {
         
-		person = personBo.findPersonById(Integer.toString(person.getPersonId()));
-		Duty duty = dutyBo.findDutyById(dutyId);
-		
-		
-		dutyBo.addPerson(person, duty);
+		dutyBo.addPerson(Integer.toString(person.getPersonId()), dutyId);
 
 		return "redirect:/" + festivalName + "/assignduty/" + dutyId;
 	}
@@ -62,11 +58,7 @@ public class AssignDuty2PersonController {
     		Map<String, Object> map) {
         
 		
-		Person person = personBo.findPersonById(personId);
-		Duty duty = dutyBo.findDutyById(dutyId);
-		
-		
-		personBo.deleteDutyFromPerson(duty, person);
+		dutyBo.deletePerson(personId, dutyId);
 
 		return "redirect:/" + festivalName + "/assignduty/" + dutyId;
 	}

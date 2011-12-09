@@ -13,4 +13,5 @@ public interface FestivalBo {
 	void addDuty(String festivalId, Duty duty);
 	Festival findFestivalById(String id);
 	Festival findFestivalByName(String festivalName);
+	List<Duty> getAllDuties(String festivalName);
 }

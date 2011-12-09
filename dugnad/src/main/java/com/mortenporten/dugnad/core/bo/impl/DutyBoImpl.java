@@ -1,6 +1,6 @@
 package com.mortenporten.dugnad.core.bo.impl;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mortenporten.dugnad.core.bo.DutyBo;
 import com.mortenporten.dugnad.core.bo.FestivalBo;
+import com.mortenporten.dugnad.core.bo.PersonBo;
 import com.mortenporten.dugnad.core.dao.DutyDao;
 import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Festival;
@@ -21,6 +22,8 @@ public class DutyBoImpl implements DutyBo {
 	DutyDao dutyDao;
 	@Autowired
 	FestivalBo festivalBo;
+	@Autowired
+	PersonBo personBo;
 	
 	@Override
 	@Transactional
@@ -62,24 +65,27 @@ public class DutyBoImpl implements DutyBo {
 
 	@Override
 	@Transactional
-	public void addPerson(Person person, Duty duty) {
+	public void addPerson(String personId, String dutyId) {
+		Duty duty = findDutyById(dutyId);
+		Person person = personBo.findPersonById(personId);
 		duty.getPersons().add(person);
-		updateDuty(duty);
+		
 	}
 
 	@Override
 	@Transactional
 	public List<Person> findAllPersonsAssigned2Duty(Duty duty) {
-		
 		return (List<Person>) duty.getPersons();
 	}
 
 	@Override
-	public void deletePerson(Person person, Duty duty) {
-		if(duty.getPersons().contains(person)){
-			System.out.println("teit");
-			duty.getPersons().remove(person);
-		}
+	@Transactional
+	public void deletePerson(String personId, String dutyId) {
+		Duty duty = findDutyById(dutyId);
+		Person person = personBo.findPersonById(personId);
+		
+		duty.getPersons().remove(person);
+		
 		
 	}
 

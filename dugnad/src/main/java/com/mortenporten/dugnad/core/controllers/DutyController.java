@@ -30,12 +30,12 @@ public class DutyController {
 	
 	
 	@RequestMapping("/duties") 
-    public String listDuties(Map<String, Object> map) {
+    public String listDuties(@PathVariable("festivalName")
+    String festivalName, Map<String, Object> map) {
  
-        map.put("duties",dutyBo.getAllDuties());
+		map.put("duties",festivalBo.getAllDuties(festivalName));
         map.put("duty", new Duty());
         
- 
         return "duties";
     }
 	
@@ -51,6 +51,7 @@ public class DutyController {
     	
     	 
     	Festival festival = festivalBo.findFestivalByName(festivalName);
+    	duty.setFestival(festival);
     	dutyBo.addDuty(duty);
     	festivalBo.addDuty(Integer.toString(festival.getFestivalId()), duty);
     	

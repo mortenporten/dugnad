@@ -16,11 +16,13 @@ public interface PersonBo {
 	
 	public void deletePerson(String id);
 	
-	//void addDuty(Duty duty, Person person);
+	void addDuty(Duty duty, Person person);
 	
 	Map<String,String> getAllPersonMap();
 
-	void deleteDutyFromPerson(Duty duty, Person person);
+	void deleteDutyFromPerson(String dutyId, String personId);
 	
 	void updatePerson(Person person);
+	
+	List<Duty> findAllDutiesForPerson(String personId);
 }

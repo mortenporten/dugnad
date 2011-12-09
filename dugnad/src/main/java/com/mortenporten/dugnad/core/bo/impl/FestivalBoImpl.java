@@ -56,6 +56,13 @@ public class FestivalBoImpl implements FestivalBo {
 	public Festival findFestivalByName(String festivalName) {
 		return festivalDao.findFestivalByName(festivalName);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Duty> getAllDuties(String festivalName) {
+		Festival festival = findFestivalByName(festivalName);
+		return (List<Duty>) festival.getDuties();
+	}
 	
 	
 }

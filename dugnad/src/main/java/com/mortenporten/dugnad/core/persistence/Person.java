@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
@@ -32,8 +34,8 @@ public class Person implements java.io.Serializable {
 	private String name;
 	private String telephone;
 	private String email;
-	//private Collection<Duty> duties;
-	private Duty duty;
+	private Collection<Duty> duties;
+
 
 
 	@Id
@@ -81,27 +83,18 @@ public class Person implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	public Duty getDuty() {
-		return duty;
-	}
 
-
-	public void setDuty(Duty duty) {
-		this.duty = duty;
-	}
-
-	/*@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "Duty_Person", joinColumns = { @JoinColumn(name = "personId") }, inverseJoinColumns = { @JoinColumn(name = "dutyId") })*/
-	
-	/*public Collection<Duty> getDuties() {
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Duty_Person", joinColumns = { @JoinColumn(name = "personId") }, inverseJoinColumns = { @JoinColumn(name = "dutyId") })
+	@LazyCollection(LazyCollectionOption.FALSE)
+	public Collection<Duty> getDuties() {
 		return duties;
 	}
 
 
 	public void setDuties(Collection<Duty> duties) {
 		this.duties = duties;
-	}*/
+	}
 	
 	
 	

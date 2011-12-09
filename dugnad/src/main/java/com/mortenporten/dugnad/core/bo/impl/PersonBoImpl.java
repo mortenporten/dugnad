@@ -20,7 +20,7 @@ public class PersonBoImpl implements PersonBo {
 	@Autowired
 	PersonDao personDao;
 	@Autowired
-	DutyBo dutyBo; 
+	DutyBo dutyBo;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -49,13 +49,13 @@ public class PersonBoImpl implements PersonBo {
 		
 	}
 
-	/*@Override
+	@Override
 	@Transactional
 	public void addDuty(Duty duty, Person person) {
 		person.getDuties().add(duty);
 		
 		
-	}*/
+	}
 	
 	@Override
 	public Map<String,String> getAllPersonMap(){
@@ -69,12 +69,11 @@ public class PersonBoImpl implements PersonBo {
 
 	@Override
 	@Transactional
-	public void deleteDutyFromPerson(Duty duty, Person person) {
-		duty.getPersons().remove(person);
-		//person.getDuties().remove(duty);
-		updatePerson(person);
+	public void deleteDutyFromPerson(String dutyId, String personId) {
+		Person person = findPersonById(personId);
+		Duty duty = dutyBo.findDutyById(dutyId);
 		
-		
+		person.getDuties().remove(duty);
 	}
 
 	@Override
@@ -82,5 +81,15 @@ public class PersonBoImpl implements PersonBo {
 		personDao.updatePerson(person);
 		
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Duty> findAllDutiesForPerson(String personId) {
+		Person person = findPersonById(personId);
+		
+		return (List<Duty>) person.getDuties();
+	}
+	
+	
 
 }

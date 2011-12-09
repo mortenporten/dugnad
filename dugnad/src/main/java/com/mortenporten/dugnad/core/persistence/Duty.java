@@ -75,7 +75,7 @@ public class Duty implements Serializable{
 	}
 	
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	public Festival getFestival() {
 		return festival;
 	}
@@ -84,9 +84,8 @@ public class Duty implements Serializable{
 		this.festival = festival;
 	}
 	
-	/*@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "Duty_Person", joinColumns = { @JoinColumn(name = "dutyId") }, inverseJoinColumns = { @JoinColumn(name = "personId") })*/
-	@OneToMany()
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name = "Duty_Person", joinColumns = { @JoinColumn(name = "dutyId") }, inverseJoinColumns = { @JoinColumn(name = "personId") })
 	public Collection<Person> getPersons() {
 		return persons;
 	}
