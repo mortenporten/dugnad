@@ -56,7 +56,8 @@ public class PersonController {
 	    public String deleteContact(@PathVariable("personId")
 	    String personId) {
 	 
-	       personBo.deletePerson(personId);
+	       personBo.deleteAllPersonDutiesAndPerson(personId, 
+	    		   personBo.getPersonDutiesId(personId));
 	 
 	        return "redirect:/person/persons";
 	    }

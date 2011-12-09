@@ -21,8 +21,10 @@ public interface PersonBo {
 	Map<String,String> getAllPersonMap();
 
 	void deleteDutyFromPerson(String dutyId, String personId);
+		
+	List<Duty> findAllDutiesForPersonForFestival(String personId, String festivalName);
 	
-	void updatePerson(Person person);
+	List<String> getPersonDutiesId(String personId);
 	
-	List<Duty> findAllDutiesForPerson(String personId);
+	void deleteAllPersonDutiesAndPerson(String personId, List<String> dutiesId);
 }

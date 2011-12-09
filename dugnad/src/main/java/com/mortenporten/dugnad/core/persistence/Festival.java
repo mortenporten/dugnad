@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,7 +50,7 @@ public class Festival implements Serializable {
 		this.festivalName = festivalName;
 	}
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	public Collection<Duty> getDuties() {
 		return duties;

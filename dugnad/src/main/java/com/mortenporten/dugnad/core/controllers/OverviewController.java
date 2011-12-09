@@ -16,7 +16,7 @@ import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Person;
 
 @Controller
-@RequestMapping("/overview/*")
+@RequestMapping("/{festivalName}/overview/*")
 @SessionAttributes({"chosenPerson"})
 public class OverviewController {
 	
@@ -25,11 +25,13 @@ public class OverviewController {
 	
 	@RequestMapping("/pickperson")
 	public String pickPerson(@ModelAttribute("person") Person person,
+			@PathVariable("festivalName")
+    		String festivalName,
 			ModelMap map) {
 
 		if(person.getPersonId() != null){
 			String personId = Integer.toString(person.getPersonId());
-			List<Duty> duties = personBo.findAllDutiesForPerson(personId);
+			List<Duty> duties = personBo.findAllDutiesForPersonForFestival(personId, festivalName);
 			map.put("duties", duties);
 			person = personBo.findPersonById(personId);
 			map.put("chosenPerson", person);
@@ -46,6 +48,8 @@ public class OverviewController {
 	@RequestMapping("/delete/{dutyId}")
 	public String deleteDutyFromPerson(
 			@PathVariable("dutyId") String dutyId,
+			@PathVariable("festivalName")
+    		String festivalName,
 			@ModelAttribute("chosenPerson") Person chosenPerson,
 			ModelMap map) {
         
@@ -53,7 +57,7 @@ public class OverviewController {
 				Integer.toString(chosenPerson.getPersonId()));
 		map.put("person", chosenPerson);
 		
-		return "redirect:/overview/pickperson";
+		return "redirect:/" + festivalName + "/overview/pickperson";
 	}
 	
 	

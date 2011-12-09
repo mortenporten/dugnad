@@ -89,11 +89,6 @@ public class DutyBoImpl implements DutyBo {
 		
 	}
 
-	@Override
-	public void updateDuty(Duty duty) {
-		dutyDao.updateDuty(duty);
-		
-	}
 	
 	
 }

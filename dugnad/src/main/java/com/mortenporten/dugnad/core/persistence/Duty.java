@@ -85,7 +85,6 @@ public class Duty implements Serializable{
 	}
 	
 	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name = "Duty_Person", joinColumns = { @JoinColumn(name = "dutyId") }, inverseJoinColumns = { @JoinColumn(name = "personId") })
 	public Collection<Person> getPersons() {
 		return persons;
 	}

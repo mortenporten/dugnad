@@ -1,5 +1,6 @@
 package com.mortenporten.dugnad.core.bo.impl;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mortenporten.dugnad.core.bo.DutyBo;
+import com.mortenporten.dugnad.core.bo.FestivalBo;
 import com.mortenporten.dugnad.core.bo.PersonBo;
 import com.mortenporten.dugnad.core.dao.PersonDao;
 import com.mortenporten.dugnad.core.persistence.Duty;
+import com.mortenporten.dugnad.core.persistence.Festival;
 import com.mortenporten.dugnad.core.persistence.Person;
 
 @Service("personBo")
@@ -21,6 +24,9 @@ public class PersonBoImpl implements PersonBo {
 	PersonDao personDao;
 	@Autowired
 	DutyBo dutyBo;
+	@Autowired
+	FestivalBo festivalBo;
+	
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -45,6 +51,7 @@ public class PersonBoImpl implements PersonBo {
 	@Override
 	@Transactional
 	public void deletePerson(String id) {
+		
 		personDao.deletePerson(id);
 		
 	}
@@ -76,18 +83,43 @@ public class PersonBoImpl implements PersonBo {
 		person.getDuties().remove(duty);
 	}
 
+	
+
 	@Override
-	public void updatePerson(Person person) {
-		personDao.updatePerson(person);
+	@Transactional(readOnly = true)
+	public List<Duty> findAllDutiesForPersonForFestival(String personId, String festivalName) {
+		Person person = findPersonById(personId);
+		Festival festival = festivalBo.findFestivalByName(festivalName);
 		
+		List<Duty> duties = (List<Duty>) person.getDuties();
+		List<Duty> dutiesForFestival = new ArrayList<Duty>();
+		
+		for(Duty d : duties){
+			if(d.getFestival().equals(festival)){
+			dutiesForFestival.add(d);
+			}
+		}
+		
+		return dutiesForFestival;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Duty> findAllDutiesForPerson(String personId) {
+	public List<String> getPersonDutiesId(String personId) {
+		List<String> dutiesId = new ArrayList<String>();
 		Person person = findPersonById(personId);
-		
-		return (List<Duty>) person.getDuties();
+		for(Duty d : person.getDuties()){
+			dutiesId.add(Integer.toString(d.getDutyId()));
+		}
+		return dutiesId;
+	}
+
+	@Override
+	public void deleteAllPersonDutiesAndPerson(String personId, List<String> dutiesId) {
+		for(String s:dutiesId){
+			dutyBo.deletePerson(personId, s);
+		}
+		deletePerson(personId);
 	}
 	
 	

@@ -84,8 +84,7 @@ public class Person implements java.io.Serializable {
 	}
 
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "Duty_Person", joinColumns = { @JoinColumn(name = "personId") }, inverseJoinColumns = { @JoinColumn(name = "dutyId") })
+	@ManyToMany(mappedBy="persons")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	public Collection<Duty> getDuties() {
 		return duties;
