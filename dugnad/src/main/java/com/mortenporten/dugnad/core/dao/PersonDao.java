@@ -17,4 +17,7 @@ public interface PersonDao {
 	
 	void updatePerson(Person person);
 	
+	boolean containsPerson(Person person);
+	
+		
 }

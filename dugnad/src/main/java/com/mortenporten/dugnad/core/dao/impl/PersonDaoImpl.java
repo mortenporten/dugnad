@@ -48,6 +48,12 @@ public class PersonDaoImpl extends CustomHibernateDAOsupport implements PersonDa
 		
 	}
 
+	@Override
+	public boolean containsPerson(Person person) {
+		return getHibernateTemplate().contains(person);
+	}
+	
+	
 	
 	
 }

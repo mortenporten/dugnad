@@ -50,9 +50,12 @@ public class PersonBoImpl implements PersonBo {
 
 	@Override
 	@Transactional
-	public void deletePerson(String id) {
-		
-		personDao.deletePerson(id);
+	public void deletePerson(String personId) {
+		List<String> duties = getPersonDutiesId(personId);
+		for(String s:duties){
+			dutyBo.deletePerson(personId, s);
+		}
+		personDao.deletePerson(personId);
 		
 	}
 
@@ -115,13 +118,17 @@ public class PersonBoImpl implements PersonBo {
 	}
 
 	@Override
-	public void deleteAllPersonDutiesAndPerson(String personId, List<String> dutiesId) {
-		for(String s:dutiesId){
-			dutyBo.deletePerson(personId, s);
-		}
-		deletePerson(personId);
+	public boolean containsPerson(Person person) {
+		return personDao.containsPerson(person);
 	}
-	
-	
+
+	@Override
+	public void updatePerson(Person person) {
+		personDao.updatePerson(person);
+		
+	}
+
+
+		
 
 }

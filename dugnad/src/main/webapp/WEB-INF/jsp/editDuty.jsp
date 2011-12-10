@@ -1,7 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
 
@@ -46,7 +46,7 @@
  
 <h2>Contact Manager</h2>
  
-<form:form method="post" id="addDuty" action="add.html" commandName="duty">
+<form:form method="post" id="addDuty" action="edited.html" commandName="duty">
  
     <table>
     <tr>
@@ -70,25 +70,7 @@
 </table>
 </form:form>
  
-<h3>Contacts</h3>
-<c:if  test="${!empty duties}">
-<table class="data">
-<tr>
-    <th>Start</th>
-    <th>End</th>
-    <th>hours</th>
-</tr>
-<c:forEach items="${duties}" var="d">
-    <tr>
-        <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.start.time}"  /></td>
-        <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.end.time}"  /></td>
-        <td>${d.hours}</td>
-        <td><a href="delete/${d.dutyId}">delete</a></td>
-        <td><a href="edit/${d.dutyId}">edit</a></td>
-    </tr>
-</c:forEach>
-</table>
-</c:if>
+
 
 
 </body>

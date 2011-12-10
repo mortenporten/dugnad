@@ -6,11 +6,13 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 import com.mortenporten.dugnad.core.bo.DutyBo;
@@ -21,6 +23,7 @@ import com.mortenporten.dugnad.core.persistence.Person;
 
 @Controller
 @RequestMapping("/{festivalName}/duty")
+@SessionAttributes({"duty"})
 public class DutyController {
 
 	@Autowired
@@ -65,6 +68,27 @@ public class DutyController {
  
 		dutyBo.deleteDuty(dutyId);
  
+        return "redirect:/" + festivalName + "/duty/duties";
+    }
+	
+	@RequestMapping("/edit/{dutyId}")
+    public String editContact(@PathVariable("dutyId")
+    String dutyId, @PathVariable("festivalName")
+    String festivalName, ModelMap map) {
+ 
+		Duty duty = dutyBo.findDutyById(dutyId);
+		map.addAttribute(duty);
+		
+        return "editDuty";
+    }
+	
+	@RequestMapping("/edit/edited")
+    public String editContact(@PathVariable("festivalName")
+    String festivalName,@Valid @ModelAttribute("duty")
+    Duty duty, BindingResult result, ModelMap map) {
+ 
+		dutyBo.updateDuty(duty);
+		
         return "redirect:/" + festivalName + "/duty/duties";
     }
 }

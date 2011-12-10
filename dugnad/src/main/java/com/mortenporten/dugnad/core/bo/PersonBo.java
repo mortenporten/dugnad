@@ -26,5 +26,7 @@ public interface PersonBo {
 	
 	List<String> getPersonDutiesId(String personId);
 	
-	void deleteAllPersonDutiesAndPerson(String personId, List<String> dutiesId);
+	boolean containsPerson(Person person);
+	
+	void updatePerson(Person person);
 }
