@@ -47,7 +47,7 @@ public class DutyController {
     String festivalName,@Valid @ModelAttribute("duty")
     Duty duty, BindingResult result) {
     	
-    	 if(result.hasErrors())  
+		if(result.hasErrors())  
     	    {  
     	       return "duties";  
     	    } 

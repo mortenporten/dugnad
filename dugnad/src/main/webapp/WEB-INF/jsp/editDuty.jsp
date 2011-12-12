@@ -2,6 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
 
@@ -50,17 +51,17 @@
  
     <table>
     <tr>
-        <td><form:label path="start">start</form:label></td>
-        <td><form:input id="start" path="start" /></td>
+        <td><form:label path="start"><spring:message code="label.start"/></form:label></td>
+        <td><form:input id="start" path="start" /></td><td><form:errors path="start" /></td>
     </tr>
    
     <tr>
-        <td><form:label path="end">end</form:label></td>
-        <td><form:input id="end" path="end" /></td>
+        <td><form:label path="end"><spring:message code="label.end"/></form:label></td>
+        <td><form:input id="end" path="end" /></td><td><form:errors path="end" /></td>
     </tr>
     <tr>
-        <td><form:label path="hours">hours</form:label></td>
-        <td><form:input path="hours" /></td>
+        <td><form:label path="hours"><spring:message code="label.hours"/></form:label></td>
+        <td><form:input path="hours" /></td><td><form:errors path="hours" /></td>
     </tr>
     <tr>
         <td colspan="2">

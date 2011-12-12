@@ -43,7 +43,7 @@ public class AssignDuty2PersonController {
 	@RequestMapping("/{dutyId}/add")
 	public String addDuty2Person(@PathVariable("dutyId") String dutyId,
 			@PathVariable("festivalName")
-    		String festivalName ,@ModelAttribute("person")
+    		String festivalName, @ModelAttribute("person")
     		Person person, Map<String, Object> map) {
         
 		dutyBo.addPerson(Integer.toString(person.getPersonId()), dutyId);

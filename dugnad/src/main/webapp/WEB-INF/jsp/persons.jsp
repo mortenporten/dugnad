@@ -1,7 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>Spring 3 MVC Series - Contact Manager | viralpatel.net</title>
@@ -14,8 +14,8 @@
  
     <table>
     <tr>
-        <td><form:label path="name">navn</form:label></td>
-        <td><form:input path="name" /></td>
+        <td><form:label path="name"><spring:message code="label.name"/></form:label></td>
+        <td><form:input path="name" /></td><td><form:errors path="name" /></td>
     </tr>
    
     <tr>
@@ -23,7 +23,7 @@
         <td><form:input path="email" /></td><td><form:errors path="email" /></td>
     </tr>
     <tr>
-        <td><form:label path="telephone">telefon</form:label></td>
+        <td><form:label path="telephone"><spring:message code="label.telephone"/></form:label></td>
         <td><form:input path="telephone" /></td><td><form:errors path="telephone" /></td>
     </tr>
     <tr>

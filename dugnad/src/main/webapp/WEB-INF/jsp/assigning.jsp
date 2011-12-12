@@ -1,12 +1,18 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
     
      <link rel="stylesheet" media="all" href="<c:url value="/resources/jquery-ui/css/ui-lightness/jquery-ui-1.8.16.custom.css" />" type="text/css" />
  <script type="text/javascript" src="<c:url value="/resources/jquery/jquery-1.7/jquery-1.7.1.js" />"></script>
  <script type="text/javascript" src="<c:url value="/resources/jquery-ui/js/jquery-ui-1.8.16.custom.min.js" />"></script>
+    <style>
+	.ui-button { margin-left: -1px; }
+	.ui-button-icon-only .ui-button-text { padding: 0.35em; } 
+	.ui-autocomplete-input { margin: 0; padding: 0.48em 0 0.47em 0.45em; }
+	</style>
     
     <title>Assign duties to persons</title>
 </head>
@@ -15,11 +21,7 @@
 <h2>dutyname</h2>
  
 
-	<style>
-	.ui-button { margin-left: -1px; }
-	.ui-button-icon-only .ui-button-text { padding: 0.35em; } 
-	.ui-autocomplete-input { margin: 0; padding: 0.48em 0 0.47em 0.45em; }
-	</style>
+	
 	<script>
 	(function( $ ) {
 		$.widget( "ui.combobox", {
@@ -137,7 +139,7 @@
 
 		<c:if test="${!empty persons}">
 			<div class="ui-widget">
-				<label>Your preferred programming language: </label> 
+				<label>Velg person som skal leggest til </label> 
 			<form:form method="post" action="${duty.dutyId}/add.html" commandName="person">
 			<form:select id="combobox" path="personId">
 					  <form:option value="NONE" label="" />
@@ -148,7 +150,7 @@
         </td>
 		</form:form>
 		</div>
-		<button id="toggle">Show underlying select</button>
+		<button id="toggle"><spring:message code="label.showAllPeople"/></button>
 		</c:if>
 	</div>
 	
@@ -165,7 +167,7 @@
         <td>${p.name} </td>
         <td>${p.email}</td>
         <td>${p.telephone}</td>
-        <td><a href="${duty.dutyId}/delete/${p.personId}">delete</a></td>
+        <td><a href="${duty.dutyId}/delete/${p.personId}"><spring:message code="label.delete"/></a></td>
     </tr>
 </c:forEach>
 </table>
