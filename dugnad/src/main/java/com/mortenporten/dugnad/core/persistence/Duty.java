@@ -93,4 +93,5 @@ public class Duty implements Serializable{
 		this.persons = persons;
 	}
 	
+	
 }

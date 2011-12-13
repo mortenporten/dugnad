@@ -140,14 +140,15 @@
 		<c:if test="${!empty persons}">
 			<div class="ui-widget">
 				<label>Velg person som skal leggest til </label> 
-			<form:form method="post" action="${duty.dutyId}/add.html" commandName="person">
+			<form:form method="post" action="add.html" commandName="person">
 			<form:select id="combobox" path="personId">
-					  <form:option value="NONE" label="" />
+					  <form:option value="" label="" />
 					  <form:options items="${persons}" />
 		</form:select>
 		  <td colspan="2">
             <input type="submit" value="add"/>
         </td>
+        <td><form:errors path="personId" /></td>
 		</form:form>
 		</div>
 		<button id="toggle"><spring:message code="label.showAllPeople"/></button>

@@ -2,9 +2,9 @@ package com.mortenporten.dugnad.validators;
 
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import com.mortenporten.dugnad.core.bo.DutyBo;
@@ -12,6 +12,7 @@ import com.mortenporten.dugnad.core.bo.PersonBo;
 import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Person;
 
+@Service
 public class AssignDutyValidator {
 
 	@Autowired
@@ -23,10 +24,14 @@ public class AssignDutyValidator {
 			String dutyId){
 		
 			Person person = personBo.findPersonById(personId);
-			Duty duty = dutyBo.findDutyById(personId);
+			Duty duty = dutyBo.findDutyById(dutyId);
 			
 			
 			Collection<Duty> duties =  person.getDuties();
+			
+			if(!validate(duty, duties)){
+				result.rejectValue("personId", "overlapping.duty.personId");
+				}
 			
 			
 			
