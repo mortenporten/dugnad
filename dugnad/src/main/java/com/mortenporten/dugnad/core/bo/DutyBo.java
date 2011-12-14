@@ -15,6 +15,7 @@ public interface DutyBo {
 	List<Person> findAllPersonsAssigned2Duty(Duty duty);
 	void deletePerson(String personId, String dutyId);
 	void updateDuty(Duty duty);
+	void updateRequired(boolean add, Duty duty);
 
 	
 }

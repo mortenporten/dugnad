@@ -133,13 +133,11 @@
 	});
 	</script>
 
-
-
 	<div class="demo">
 
 		<c:if test="${!empty persons}">
 			<div class="ui-widget">
-				<label>Velg person</label> 
+				<label>choose person</label> 
 			<form:form method="post" action="pickperson" commandName="person">
 			<form:select id="combobox" path="personId">
 					  <form:option value="NONE" label="" />
@@ -154,7 +152,7 @@
 		</c:if>
 	</div>
 
-<h3>Duties for ${chosenPerson.name}</h3>
+<h3>Duties for ${chosenPerson.firstName}</h3>
 <c:if  test="${!empty duties}">
 <table class="data">
 <tr>
@@ -168,10 +166,15 @@
         <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.end.time}"  /></td>
         <td>${d.hours}</td>
         <td><a href="delete/${d.dutyId}">delete</a></td>
-    </tr>
 </c:forEach>
+    <tr>
+    <td>hours worked:</td><td></td> <td>${hours}</td>
+   </tr>
 </table>
 </c:if>	
+<c:if test="${empty duties}">
+Person dont have any duties
+</c:if>
 
 
 </body>

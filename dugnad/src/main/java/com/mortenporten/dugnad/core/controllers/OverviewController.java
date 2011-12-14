@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.mortenporten.dugnad.core.bo.DutyBo;
 import com.mortenporten.dugnad.core.bo.PersonBo;
 import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Person;
@@ -22,6 +23,8 @@ public class OverviewController {
 	
 	@Autowired
 	PersonBo personBo;
+	@Autowired
+	DutyBo dutyBo;
 	
 	@RequestMapping("/pickperson")
 	public String pickPerson(@ModelAttribute("person") Person person,
@@ -31,10 +34,14 @@ public class OverviewController {
 
 		if(person.getPersonId() != null){
 			String personId = Integer.toString(person.getPersonId());
+			
 			List<Duty> duties = personBo.findAllDutiesForPersonForFestival(personId, festivalName);
 			map.put("duties", duties);
+			
 			person = personBo.findPersonById(personId);
 			map.put("chosenPerson", person);
+			
+			map.put("hours", personBo.findHoursForPerson(duties));
 		}else{
 			map.put("duties", new ArrayList<Duty>());
 		}
@@ -53,8 +60,7 @@ public class OverviewController {
 			@ModelAttribute("chosenPerson") Person chosenPerson,
 			ModelMap map) {
         
-		personBo.deleteDutyFromPerson(dutyId, 
-				Integer.toString(chosenPerson.getPersonId()));
+		dutyBo.deletePerson(Integer.toString(chosenPerson.getPersonId()), dutyId); 
 		map.put("person", chosenPerson);
 		
 		return "redirect:/" + festivalName + "/overview/pickperson";

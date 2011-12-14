@@ -59,13 +59,6 @@ public class PersonBoImpl implements PersonBo {
 		
 	}
 
-	@Override
-	@Transactional
-	public void addDuty(Duty duty, Person person) {
-		person.getDuties().add(duty);
-		
-		
-	}
 	
 	@Override
 	public Map<String,String> getAllPersonMap(){
@@ -73,7 +66,7 @@ public class PersonBoImpl implements PersonBo {
 		Map<String, String> personMap = new LinkedHashMap<String,String>();
 		for(Person p : personList ){
 			personMap.put(Integer.toString(p.getPersonId()), p.getLastName() + 
-					"," + p.getFirstName());
+					", " + p.getFirstName());
 		}
 		return personMap;
 	}
@@ -83,6 +76,7 @@ public class PersonBoImpl implements PersonBo {
 	public void deleteDutyFromPerson(String dutyId, String personId) {
 		Person person = findPersonById(personId);
 		Duty duty = dutyBo.findDutyById(dutyId);
+		dutyBo.updateRequired(true, duty);
 		
 		person.getDuties().remove(duty);
 	}
@@ -127,6 +121,17 @@ public class PersonBoImpl implements PersonBo {
 	public void updatePerson(Person person) {
 		personDao.updatePerson(person);
 		
+	}
+
+	@Override
+	public Double findHoursForPerson(List<Duty> duties) {
+		Double hours = 0.00;
+		for(Duty d : duties){
+			if(d.getHours() != null){
+				hours+=d.getHours();
+			}
+		}
+		return hours;
 	}
 
 

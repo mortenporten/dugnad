@@ -165,7 +165,7 @@
 </tr>
 <c:forEach items="${assigned}" var="p">
     <tr>
-        <td>${p.name} </td>
+        <td>${p.firstName} </td>
         <td>${p.email}</td>
         <td>${p.telephone}</td>
         <td><a href="${duty.dutyId}/delete/${p.personId}"><spring:message code="label.delete"/></a></td>

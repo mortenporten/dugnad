@@ -12,12 +12,10 @@ public interface PersonBo {
     
 	List<Person> findAllPersons(); 
 	
-	public void addPerson(Person person);
+	void addPerson(Person person);
 	
-	public void deletePerson(String id);
-	
-	void addDuty(Duty duty, Person person);
-	
+	void deletePerson(String id);
+		
 	Map<String,String> getAllPersonMap();
 
 	void deleteDutyFromPerson(String dutyId, String personId);
@@ -29,4 +27,6 @@ public interface PersonBo {
 	boolean containsPerson(Person person);
 	
 	void updatePerson(Person person);
+	
+	Double findHoursForPerson(List<Duty> duties);
 }

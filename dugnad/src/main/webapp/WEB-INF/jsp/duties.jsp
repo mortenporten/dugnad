@@ -178,44 +178,42 @@
         <td><form:label path="start"><spring:message code="label.start"/></form:label></td>
         <td><form:input id="start" path="start" /></td><td><form:errors path="start" /></td>
     </tr>
-    <tr>     
-		<c:if test="${!empty persons}">
-			<div class="ui-widget">
-				<label>Choose responsible</label> 
-			<form:form method="post" action="pickperson" commandName="person">
-			<form:select id="combobox" path="personId">
-					  <form:option value="" label="" />
-					  <form:options items="${persons}" />
-		</form:select>
-		  <td colspan="2">
-           
-        </td>
-		</form:form>
-		</div>
-	
-		</c:if>
-	</tr>
     <tr>
         <td><form:label path="end"><spring:message code="label.end"/></form:label></td>
         <td><form:input id="end" path="end" /></td><td><form:errors path="end" /></td>
     </tr>
     <tr>
-        <td><form:label path="hours"><spring:message code="label.hours"/></form:label></td>
-        <td><form:input path="hours" /></td><td><form:errors path="hours" /></td>
+        <td><form:label  path="hours"><spring:message code="label.hours"/></form:label></td>
+        <td><form:input  path="hours" /></td><td><form:errors path="hours" /></td>
+    </tr>
+    <tr>
+        <td><form:label  path="required">required</form:label></td>
+        <td><form:input  path="required" /></td><td><form:errors path="required" /></td>
     </tr>
     <tr>
         <td><form:label path="description"><spring:message code="label.description"/></form:label></td>
         <td><form:textarea path="description" /></td><td><form:errors path="description" /></td>
+    </tr>    
+</table>
+ <tr>
+     <td><form:label path="responsible">choose responsible</form:label></td> 
+    <form:select  id="combobox" path="responsible.personId">
+					<form:option value="" label="" />
+					<form:options items="${persons}" />
+	</form:select>
     </tr>
-    <tr>
+    <br>
+     <tr>
         <td colspan="2">
             <input type="submit" value="add"/>
         </td>
     </tr>
-</table>
 </form:form>
- 
-<h3>Contacts</h3>
+
+	
+
+
+	<h3>Contacts</h3>
 <c:if  test="${!empty duties}">
 <table class="data">
 <tr>
@@ -224,6 +222,8 @@
     <th>Start</th>
     <th>End</th>
     <th>hours</th>
+    <th>required</th>
+    <th>responsible</th>
     <th>description</th>
 </tr>
 <c:forEach items="${duties}" var="d">
@@ -233,6 +233,8 @@
         <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.start.time}"  /></td>
         <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.end.time}"  /></td>
         <td>${d.hours}</td>
+        <td>${d.required}</td>
+        <td>${d.responsible.firstName}</td>
         <td>${d.description}</td>
         <td><a href="delete/${d.dutyId}">delete</a></td>
         <td><a href="edit/${d.dutyId}">edit</a></td>

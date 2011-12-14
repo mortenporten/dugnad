@@ -68,6 +68,7 @@ public class DutyBoImpl implements DutyBo {
 	public void addPerson(String personId, String dutyId) {
 		Duty duty = findDutyById(dutyId);
 		Person person = personBo.findPersonById(personId);
+		updateRequired(false, duty);
 		duty.getPersons().add(person);
 		
 	}
@@ -83,7 +84,7 @@ public class DutyBoImpl implements DutyBo {
 	public void deletePerson(String personId, String dutyId) {
 		Duty duty = findDutyById(dutyId);
 		Person person = personBo.findPersonById(personId);
-		
+		updateRequired(true, duty);
 		duty.getPersons().remove(person);
 		
 		
@@ -94,7 +95,16 @@ public class DutyBoImpl implements DutyBo {
 		dutyDao.updateDuty(duty);
 		
 	}
-
 	
+	@Override
+	public void updateRequired(boolean add, Duty duty){
+		if(duty.getRequired() != null){
+			if(add){
+				duty.setRequired(duty.getRequired() + 1);
+			}else{
+				duty.setRequired(duty.getRequired() - 1);
+			}
+		}
+	}
 	
 }

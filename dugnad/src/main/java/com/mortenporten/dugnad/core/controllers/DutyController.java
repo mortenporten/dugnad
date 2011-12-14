@@ -49,7 +49,6 @@ public class DutyController {
  
 		map.put("duties",festivalBo.getAllDuties(festivalName));
         map.put("duty", new Duty());
-        map.put("person", new Person());
         map.put("persons", personBo.getAllPersonMap());
         
         return "duties";
@@ -57,7 +56,7 @@ public class DutyController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addDuty(@PathVariable("festivalName")
-    String festivalName,@Valid @ModelAttribute("duty")
+    String festivalName, @Valid @ModelAttribute("duty")
     Duty duty, BindingResult result) {
     	
 		if(result.hasErrors())  
@@ -65,7 +64,14 @@ public class DutyController {
     	       return "duties";  
     	    } 
     	
-    	 
+    	 if(duty.getResponsible().getPersonId() != null){
+    		 Person person = personBo.findPersonById(Integer.toString(duty.getResponsible().getPersonId()));
+    		 duty.setResponsible(person);
+    	 }else{
+    		 duty.setResponsible(null);
+    	 }
+		
+		
     	Festival festival = festivalBo.findFestivalByName(festivalName);
     	duty.setFestival(festival);
     	dutyBo.addDuty(duty);

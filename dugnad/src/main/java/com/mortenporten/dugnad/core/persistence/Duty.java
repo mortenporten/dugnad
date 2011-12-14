@@ -34,7 +34,7 @@ public class Duty implements Serializable{
 	private Integer dutyId;
 	private Calendar start;
 	private Calendar end;
-	private Integer hours;
+	private Double hours;
 	private Festival festival;
 	private String place;
 	private Person responsible;
@@ -75,12 +75,12 @@ public class Duty implements Serializable{
 		this.end = end;
 	}
 	
-	@Column(name = "Hours")
-	public Integer getHours() {
+	@Column(name = "Hours", precision=10, scale=2)
+	public Double getHours() {
 		return hours;
 	}
 	
-	public void setHours(Integer hours) {
+	public void setHours(Double hours) {
 		this.hours = hours;
 	}
 	
