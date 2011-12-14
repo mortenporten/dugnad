@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,20 +19,29 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.mortenporten.dugnad.core.bo.DutyBo;
 import com.mortenporten.dugnad.core.bo.FestivalBo;
+import com.mortenporten.dugnad.core.bo.PersonBo;
 import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Festival;
 import com.mortenporten.dugnad.core.persistence.Person;
+import com.mortenporten.dugnad.validators.DutyValidator;
 
 @Controller
 @RequestMapping("/{festivalName}/duty")
-@SessionAttributes({"duty"})
+@SessionAttributes({"duties", "duty"})
 public class DutyController {
 
 	@Autowired
 	DutyBo dutyBo;
 	@Autowired
 	FestivalBo festivalBo;
+	@Autowired
+	PersonBo personBo;
 	
+	@InitBinder("duty")
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(new DutyValidator());
+    }
+
 	
 	@RequestMapping("/duties") 
     public String listDuties(@PathVariable("festivalName")
@@ -38,6 +49,8 @@ public class DutyController {
  
 		map.put("duties",festivalBo.getAllDuties(festivalName));
         map.put("duty", new Duty());
+        map.put("person", new Person());
+        map.put("persons", personBo.getAllPersonMap());
         
         return "duties";
     }
@@ -87,6 +100,10 @@ public class DutyController {
     String festivalName,@Valid @ModelAttribute("duty")
     Duty duty, BindingResult result, ModelMap map) {
  
+		if(result.hasErrors()){
+			return "editDuty";
+		}
+		
 		dutyBo.updateDuty(duty);
 		
         return "redirect:/" + festivalName + "/duty/duties";

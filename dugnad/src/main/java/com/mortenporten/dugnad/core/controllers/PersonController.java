@@ -21,7 +21,7 @@ import com.mortenporten.dugnad.core.persistence.Person;
 
 @Controller
 @RequestMapping("/person/*")
-@SessionAttributes({"person"})
+@SessionAttributes({"person","persons"})
 public class PersonController {
 
 	@Autowired

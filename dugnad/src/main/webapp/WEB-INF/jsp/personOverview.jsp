@@ -146,7 +146,7 @@
 					  <form:options items="${persons}" />
 		</form:select>
 		  <td colspan="2">
-            <input type="submit" value="velg"/>
+            <input type="submit" value="choose"/>
         </td>
 		</form:form>
 		</div>

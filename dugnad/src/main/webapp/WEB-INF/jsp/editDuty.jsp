@@ -1,7 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -51,6 +51,14 @@
  
     <table>
     <tr>
+        <td><form:label path="name"><spring:message code="label.name"/></form:label></td>
+        <td><form:input path="name" /></td><td><form:errors path="name" /></td>
+    </tr>
+    <tr>
+        <td><form:label path="place"><spring:message code="label.place"/></form:label></td>
+        <td><form:input path="place" /></td><td><form:errors path="place" /></td>
+    </tr>
+    <tr>
         <td><form:label path="start"><spring:message code="label.start"/></form:label></td>
         <td><form:input id="start" path="start" /></td><td><form:errors path="start" /></td>
     </tr>
@@ -64,14 +72,17 @@
         <td><form:input path="hours" /></td><td><form:errors path="hours" /></td>
     </tr>
     <tr>
+        <td><form:label path="description"><spring:message code="label.description"/></form:label></td>
+        <td><form:textarea path="description" /></td><td><form:errors path="description" /></td>
+    </tr>
+    <tr>
         <td colspan="2">
-            <input type="submit" value="add"/>
+            <input type="submit" value="edit"/>
         </td>
     </tr>
 </table>
 </form:form>
  
-
 
 
 </body>

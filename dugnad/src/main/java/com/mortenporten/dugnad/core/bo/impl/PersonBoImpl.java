@@ -72,7 +72,8 @@ public class PersonBoImpl implements PersonBo {
 		List<Person> personList = findAllPersons();
 		Map<String, String> personMap = new LinkedHashMap<String,String>();
 		for(Person p : personList ){
-			personMap.put(Integer.toString(p.getPersonId()), p.getName());
+			personMap.put(Integer.toString(p.getPersonId()), p.getLastName() + 
+					"," + p.getFirstName());
 		}
 		return personMap;
 	}

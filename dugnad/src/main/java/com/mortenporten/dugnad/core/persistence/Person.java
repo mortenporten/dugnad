@@ -1,17 +1,14 @@
 package com.mortenporten.dugnad.core.persistence;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 
@@ -19,8 +16,6 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 
 
@@ -30,8 +25,13 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Person implements java.io.Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9075374281953270752L;
 	private Integer personId;
-	private String name;
+	private String firstName;
+	private String lastName;
 	private String telephone;
 	private String email;
 	private Collection<Duty> duties;
@@ -51,14 +51,25 @@ public class Person implements java.io.Serializable {
 	}
 
 	
-	@Column(name = "Name")
-	public String getName() {
-		return name;
+	@Column(name = "Firstname")
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
+	
+	@Column(name = "Lastname")
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	
 	@Column(name = "Telephone")
 	@Digits(integer = 8, fraction = 0)

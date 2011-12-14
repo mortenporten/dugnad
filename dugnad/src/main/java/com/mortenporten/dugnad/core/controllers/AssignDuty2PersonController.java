@@ -28,7 +28,7 @@ public class AssignDuty2PersonController {
 	@Autowired
 	PersonBo personBo;
 	@Autowired
-	AssignDutyValidator validator;
+	AssignDutyValidator assignDutyValidator;
 
 	@RequestMapping("/{dutyId}")
 	public String assigningDuty2Person(@PathVariable("dutyId") String dutyId,
@@ -55,7 +55,7 @@ public class AssignDuty2PersonController {
         
 		String personId = Integer.toString(person.getPersonId());
 		String dutyId = Integer.toString(duty.getDutyId());
-		validator.validateAssignDuty(result, personId, dutyId);
+		assignDutyValidator.validateAssignDuty(result, personId, dutyId);
 		
 		if(result.hasErrors()){
 			return "assigning";
@@ -69,7 +69,7 @@ public class AssignDuty2PersonController {
 	@RequestMapping("/{dutyId}/delete/{personId}")
 	public String deletePersonFromDuty(@PathVariable("dutyId") String dutyId,
 			@PathVariable("festivalName")
-    		String festivalName ,@PathVariable("personId") String personId, 
+    		String festivalName, @PathVariable("personId") String personId, 
     		Map<String, Object> map) {
         
 		

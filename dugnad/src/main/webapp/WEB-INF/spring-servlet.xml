@@ -34,9 +34,6 @@
         <property name="defaultEncoding" value="UTF-8" />
     </bean> 
  	
- 	<bean id="dutyValidator" class="com.mortenporten.dugnad.validators.DutyValidator"/>
- 	
- 	<mvc:annotation-driven validator="dutyValidator"/>
  
  	<!-- Database Configuration -->
 	<import resource="/database/DataSource.xml"/>

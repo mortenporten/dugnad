@@ -14,10 +14,13 @@
  
     <table>
     <tr>
-        <td><form:label path="name"><spring:message code="label.name"/></form:label></td>
-        <td><form:input path="name" /></td><td><form:errors path="name" /></td>
+        <td><form:label path="firstName"><spring:message code="label.firstname"/></form:label></td>
+        <td><form:input path="firstName" /></td><td><form:errors path="firstName" /></td>
     </tr>
-   
+    <tr>
+        <td><form:label path="lastName"><spring:message code="label.lastname"/></form:label></td>
+        <td><form:input path="lastName" /></td><td><form:errors path="lastName" /></td>
+    </tr>
     <tr>
         <td><form:label path="email"><spring:message code="label.email"/></form:label></td>
         <td><form:input path="email" /></td><td><form:errors path="email" /></td>
@@ -38,14 +41,16 @@
 <c:if  test="${!empty persons}">
 <table class="data">
 <tr>
-    <th>Name</th>
+    <th>firstname</th>
+    <th>lastname</th>
     <th>Email</th>
     <th>Telephone</th>
     <th>&nbsp;</th>
 </tr>
 <c:forEach items="${persons}" var="p">
     <tr>
-        <td>${p.name} </td>
+        <td>${p.firstName} </td>
+        <td>${p.lastName} </td>
         <td>${p.email}</td>
         <td>${p.telephone}</td>
         <td><a href="delete/${p.personId}">delete</a></td>
