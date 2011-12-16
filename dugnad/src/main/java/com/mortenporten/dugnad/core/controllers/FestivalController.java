@@ -9,22 +9,42 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.mortenporten.dugnad.core.bo.FestivalBo;
 import com.mortenporten.dugnad.core.persistence.Festival;
+import com.mortenporten.dugnad.core.persistence.Person;
+import com.mortenporten.dugnad.validators.DutyValidator;
+import com.mortenporten.dugnad.validators.FestivalValidator;
 
 @Controller
 @RequestMapping("/festival")
+@SessionAttributes("festival")
 public class FestivalController {
 
 	@Autowired
 	FestivalBo festivalBo;
+	@Autowired
+	Validator validator;
+	@Autowired
+	FestivalValidator festivalValidator;
+	
+	@InitBinder("festival")
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(festivalValidator);
+    }
 	
 	@RequestMapping("/festivals") 
     public String listFestivals(Map<String, Object> map) {
@@ -39,6 +59,11 @@ public class FestivalController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addFestival(@Valid @ModelAttribute("festival") Festival festival,
 			BindingResult result){
+		
+		
+		BindException errors = new BindException(result);
+		validator.validate(festival,errors);
+		
 		
 		 if(result.hasErrors())  
  	    {  
@@ -74,5 +99,31 @@ public class FestivalController {
 	        return "redirect:/" + festivalName + "/duty/duties";
 	    }
 	
-	
+	  @RequestMapping(value = "/edit/{festivalId}")
+	    public String editPerson(@PathVariable("festivalId")
+	    String festivalId,ModelMap map) {
+	    	
+	    	
+	    	Festival festival = festivalBo.findFestivalById(festivalId);
+	    	map.addAttribute(festival);
+	 
+	        return "editFestival";
+	    }
+	    
+	    @RequestMapping(value = "/edit/edited")
+	    public String editedPerson(@Valid @ModelAttribute("festival")
+	    Festival festival, BindingResult result) {
+	    	
+	    	BindException errors = new BindException(result);
+			validator.validate(festival,errors);
+			
+	    	if(result.hasErrors())  
+	    	    {  
+	    		 return "editFestival";  
+	    	    }
+	    	 
+	    	festivalBo.updateFestival(festival);
+	    	 
+	    	return "redirect:/festival/festivals";
+	    }
 }

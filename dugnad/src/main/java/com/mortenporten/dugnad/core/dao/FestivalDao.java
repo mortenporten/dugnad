@@ -14,5 +14,6 @@ public interface FestivalDao {
 	public List<Festival> getAllFestivals();
 	void addDuty(String festivalId, Duty duty);
 	Festival findFestivalByName(String festivalName);
+	void updateFestival(Festival festival);
 	
 }

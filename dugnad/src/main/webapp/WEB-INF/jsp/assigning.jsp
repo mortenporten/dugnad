@@ -1,9 +1,22 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
+
+ <!-- Framework CSS -->
+<link rel="stylesheet"
+	href='<c:url value="/resources/style/blueprint/screen.css" />'
+	type="text/css" media="screen, projection" />
+<link rel="stylesheet"
+	href='<c:url value="/resources/style/blueprint/print.css" />'
+	type="text/css" media="print" />
+<!--[if IE]><link rel="stylesheet" href="<c:url value="/resources/style/blueprint/ie.css" />" type="text/css" media="screen, projection" /><![endif]-->
+<link rel="stylesheet"
+	href='<c:url value="/resources/style/css/style.css" />' type="text/css"
+	media="screen, projection" />
     
      <link rel="stylesheet" media="all" href="<c:url value="/resources/jquery-ui/css/ui-lightness/jquery-ui-1.8.16.custom.css" />" type="text/css" />
  <script type="text/javascript" src="<c:url value="/resources/jquery/jquery-1.7/jquery-1.7.1.js" />"></script>
@@ -13,16 +26,8 @@
 	.ui-button-icon-only .ui-button-text { padding: 0.35em; } 
 	.ui-autocomplete-input { margin: 0; padding: 0.48em 0 0.47em 0.45em; }
 	</style>
-    
-    <title>Assign duties to persons</title>
-</head>
-<body>
- 
-<h2>dutyname</h2>
- 
-
 	
-	<script>
+		<script>
 	(function( $ ) {
 		$.widget( "ui.combobox", {
 			_create: function() {
@@ -132,6 +137,61 @@
 		});
 	});
 	</script>
+    
+    <title>Assign duties to persons</title>
+</head>
+<body>
+
+<div class="container"> 
+ 
+ 		<h1>
+			<img src='<c:url value="/resources/style/css/img/roots.jpg" />'
+				height="150px" width="830px" alt="" />
+		</h1>
+
+		<div class="topMenu">
+			<div class="menu">
+				<a href="/dugnad/index"><spring:message code="menu.home" /></a>
+			</div>
+			<div class="menu">
+				<a href="/dugnad/festival/festivals"><spring:message code="menu.festivals" /></a>
+			</div>
+			<div class="menu">
+				<a href="/dugnad/person/persons"><spring:message code="menu.persons" /></a>
+			</div>
+			<div class="menu">
+				<a href="/dugnad/${festivalName}/duty/duties"><spring:message code="menu.duties" /></a>
+			</div>
+			<div class="menu">
+				<a href="/dugnad/${festivalName}/overview/pickperson"><spring:message code="menu.personOverview" /></a>
+			</div>
+			<div class="menu">
+				<a href="logOut"><spring:message code="menu.logOut" /></a>
+			</div>
+		</div>
+<div class="span-18 append-bottom">
+<h3>${duty.name}</h3>
+<table>
+<tr>
+    <th><spring:message code="label.place"/></th>
+    <th><spring:message code="label.start"/></th>
+    <th><spring:message code="label.end"/></th>
+    <th><spring:message code="label.hours"/></th>
+    <th><spring:message code="label.required"/></th>
+    <th><spring:message code="label.responsible"/></th>
+</tr>
+ <tr>
+        <td>${duty.place}</td>
+        <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${duty.start.time}"  /></td>
+        <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${duty.end.time}"  /></td>
+        <td>${duty.hours}</td>
+        <td>${duty.required}</td>
+        <td>${duty.responsible.firstName}</td>
+ </tr>
+ </table>
+
+	
+
 
 
 
@@ -139,14 +199,14 @@
 
 		<c:if test="${!empty persons}">
 			<div class="ui-widget">
-				<label>Velg person som skal leggest til </label> 
+				<label><spring:message code="header.choosePersonToAdd"/></label> 
 			<form:form method="post" action="add.html" commandName="person">
 			<form:select id="combobox" path="personId">
 					  <form:option value="" label="" />
 					  <form:options items="${persons}" />
 		</form:select>
 		  <td colspan="2">
-            <input type="submit" value="add"/>
+            <input type="submit" value="<spring:message code="button.choose"/>"/>
         </td>
         <td><form:errors path="personId" /></td>
 		</form:form>
@@ -155,24 +215,30 @@
 		</c:if>
 	</div>
 	
+</div>
+<div class="span-18">
+	
 	<c:if  test="${!empty assigned}">
 <table class="data">
 <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Telephone</th>
+    <th><spring:message code="label.firstName"/></th>
+    <th><spring:message code="label.lastName"/></th>
+    <th><spring:message code="label.email"/></th>
+    <th><spring:message code="label.telephone"/></th>
     <th>&nbsp;</th>
 </tr>
 <c:forEach items="${assigned}" var="p">
     <tr>
-        <td>${p.firstName} </td>
+        <td>${p.firstName}</td>
+        <td>${p.lastName}</td>
         <td>${p.email}</td>
         <td>${p.telephone}</td>
-        <td><a href="${duty.dutyId}/delete/${p.personId}"><spring:message code="label.delete"/></a></td>
+        <td><a href="${duty.dutyId}/delete/${p.personId}"><spring:message code="label.remove"/></a></td>
     </tr>
 </c:forEach>
 </table>
 </c:if>
-
+</div>
+</div>
 </body>
 </html>

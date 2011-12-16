@@ -1,0 +1,120 @@
+/*
+    Document   : stylesheet
+    Created on : 29-Sep-2009, 11:59:58
+    Author     : jbj026
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+
+body {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: smaller;
+    color: #555;
+    background-color: #eeeeeb;
+    margin: 0 auto;
+    margin-top: 0;
+    padding-top: 0;
+    background-repeat: repeat-y;
+    background-position: center;
+    width: 830px;
+}
+
+h1 {
+    text-align: left;
+    letter-spacing: 6px;
+    font-size: 1.4em;
+    color: #6ca7b2;
+    font-weight: normal;
+    width: 450px;
+}
+
+h2 {
+    text-align: left;
+    letter-spacing: 1px;
+    font-size: 1.0em;
+    color: #6ca7b2;
+    font-weight: normal;
+    width: 450px;
+}
+
+a:link {
+   color: #6ca7b2;
+   font-weight: normal;
+   text-decoration: none;
+}
+
+a:link:hover {
+   color: #6ca7b2;
+   font-weight: normal;
+   border-bottom-style: dotted;
+   border-bottom-color: #000000;
+   border-bottom-width: 1px;
+}
+
+a:visited {
+   color: #6ca7b2;
+   text-decoration: none;
+}
+
+.menu {
+	float: left;
+	display: inline;
+	padding: 5px;
+}
+
+.main {
+    background-color:white;
+    width:830px;
+    min-height: 600px;
+}
+
+.content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.menu a {
+	text-decoration: none;
+	color: #000000;
+
+}
+
+.menu:hover {
+	background-image: url("img/menubghover.png");
+	background-repeat: repeat-x;
+}
+
+.topMenu {
+	display:table;
+	background-color:#CCCCCC;
+	background-image: url("img/menubg.png");
+	background-repeat: repeat-x;
+	width:830px;
+	margin-top:-12px;
+	margin-bottom:20px;
+}
+
+.footer {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color:white;
+    width:830px;
+    height: 20px;
+    font-size: smaller;
+    font-style: italic;
+    text-align: right;
+}
+
+.errors {
+	color: #FF0000;	
+}
+
+.textbox {
+	width:250px;
+    height: 75px;
+}
+
+
+

@@ -16,6 +16,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 
 
@@ -50,7 +51,7 @@ public class Person implements java.io.Serializable {
 		this.personId = personId;
 	}
 
-	
+	@NotBlank
 	@Column(name = "Firstname")
 	public String getFirstName() {
 		return firstName;
@@ -59,7 +60,7 @@ public class Person implements java.io.Serializable {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
+	@NotBlank
 	@Column(name = "Lastname")
 	public String getLastName() {
 		return lastName;

@@ -20,7 +20,7 @@ import com.mortenporten.dugnad.validators.AssignDutyValidator;
 
 @Controller
 @RequestMapping("/{festivalName}/assignduty/*")
-@SessionAttributes({"duty","persons","person","assigned"})
+@SessionAttributes({"duty","persons","person","assigned", "festivalName"})
 public class AssignDuty2PersonController {
 
 	@Autowired
@@ -32,6 +32,7 @@ public class AssignDuty2PersonController {
 
 	@RequestMapping("/{dutyId}")
 	public String assigningDuty2Person(@PathVariable("dutyId") String dutyId,
+			@PathVariable("festivalName") String festivalName, 
 			Map<String, Object> map) {
 
 		Duty duty = dutyBo.findDutyById(dutyId);
@@ -41,7 +42,7 @@ public class AssignDuty2PersonController {
 		map.put("persons", personBo.getAllPersonMap());
 		map.put("person", new Person());
 		map.put("assigned", dutyBo.findAllPersonsAssigned2Duty(duty));
-		
+		map.put("festivalName", festivalName);
 
 		return "assigning";
 	}

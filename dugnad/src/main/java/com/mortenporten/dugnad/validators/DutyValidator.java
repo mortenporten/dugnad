@@ -23,13 +23,16 @@ public class DutyValidator implements Validator{
 		
 		if(duty.getStart() == null){
 			e.rejectValue("start", "start.must.be.set");
-			return;
+			
 		}
-		if(duty.getStart() == null){
+		if(duty.getEnd() == null){
 			e.rejectValue("end", "end.must.be.set");
-			return;
+			
 		}
 		
+		if(duty.getEnd() == null || duty.getStart() == null){
+			return;
+		}
 		
 		Calendar start = duty.getStart();
 		Calendar end = duty.getEnd();

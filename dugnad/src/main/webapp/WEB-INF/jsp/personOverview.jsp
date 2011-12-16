@@ -5,16 +5,52 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-    
-     <link rel="stylesheet" media="all" href="<c:url value="/resources/jquery-ui/css/ui-lightness/jquery-ui-1.8.16.custom.css" />" type="text/css" />
+ <!-- Framework CSS -->
+<link rel="stylesheet"
+	href='<c:url value="/resources/style/blueprint/screen.css" />'
+	type="text/css" media="screen, projection" />
+<link rel="stylesheet"
+	href='<c:url value="/resources/style/blueprint/print.css" />'
+	type="text/css" media="print" />
+<!--[if IE]><link rel="stylesheet" href="<c:url value="/resources/style/blueprint/ie.css" />" type="text/css" media="screen, projection" /><![endif]-->
+<link rel="stylesheet"
+	href='<c:url value="/resources/style/css/style.css" />' type="text/css"
+	media="screen, projection" />
+ 
+ <link rel="stylesheet" media="all" href="<c:url value="/resources/jquery-ui/css/ui-lightness/jquery-ui-1.8.16.custom.css" />" type="text/css" />
  <script type="text/javascript" src="<c:url value="/resources/jquery/jquery-1.7/jquery-1.7.1.js" />"></script>
  <script type="text/javascript" src="<c:url value="/resources/jquery-ui/js/jquery-ui-1.8.16.custom.min.js" />"></script>
-    
-    <title>Person overview</title>
+ 
+    <title><spring:message code="header.overview" /></title>
 </head>
 <body>
+<div class="container">
+
+	<h1>
+			<img src='<c:url value="/resources/style/css/img/roots.jpg" />'
+				height="150px" width="830px" alt="" />
+		</h1>
+
+		<div class="topMenu">
+			<div class="menu">
+				<a href="/dugnad/index"><spring:message code="menu.home" /></a>
+			</div>
+			<div class="menu">
+				<a href="/dugnad/festival/festivals"><spring:message code="menu.festivals"/></a>
+			</div>
+			<div class="menu">
+				<a href="/dugnad/person/persons"><spring:message code="menu.persons"/></a>
+			</div>
+			<div class="menu">
+				<a href="/dugnad/${festivalName}/duty/duties"><spring:message code="menu.duties"/></a>
+			</div>
+			<div class="menu">
+				<a href="logOut"><spring:message code="menu.logOut"/></a>
+			</div>
+		</div>
  
-<h2>Overview for persons</h2>
+<div class="span-16 append-bottom"> 
+<h3><spring:message code="header.overview" /></h3>
  
 
 	<style>
@@ -137,45 +173,53 @@
 
 		<c:if test="${!empty persons}">
 			<div class="ui-widget">
-				<label>choose person</label> 
+				<label><spring:message code="label.choosePerson" /></label> 
 			<form:form method="post" action="pickperson" commandName="person">
 			<form:select id="combobox" path="personId">
 					  <form:option value="NONE" label="" />
 					  <form:options items="${persons}" />
 		</form:select>
 		  <td colspan="2">
-            <input type="submit" value="choose"/>
+            <input type="submit" value="<spring:message code="button.choose" />"/>
         </td>
 		</form:form>
 		</div>
-		<button id="toggle">Show underlying select</button>
+		<button id="toggle"><spring:message code="label.showAllPersons" /></button>
 		</c:if>
 	</div>
 
-<h3>Duties for ${chosenPerson.firstName}</h3>
+</div>
+<div class="span-16">
+
 <c:if  test="${!empty duties}">
+<h3><spring:message code="label.dutiesFor" /> ${chosenPerson.firstName} ${chosenPerson.lastName}</h3>
+
 <table class="data">
 <tr>
-    <th>Start</th>
-    <th>End</th>
-    <th>hours</th>
+	<th><spring:message code="label.name"/></th>
+	<th><spring:message code="label.place"/></th>
+    <th><spring:message code="label.start"/></th>
+    <th><spring:message code="label.end"/></th>
+    <th><spring:message code="label.hours"/></th>
 </tr>
 <c:forEach items="${duties}" var="d">
     <tr>
+        <td>${d.name}</td>
+        <td>${d.place}</td>
         <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.start.time}"  /></td>
         <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.end.time}"  /></td>
         <td>${d.hours}</td>
-        <td><a href="delete/${d.dutyId}">delete</a></td>
+        <td><a href="delete/${d.dutyId}"><spring:message code="label.remove"/></a></td>
 </c:forEach>
     <tr>
-    <td>hours worked:</td><td></td> <td>${hours}</td>
+    <td><spring:message code="label.hoursWorked"/></td><td></td><td></td><td></td><td>${hours}</td>
    </tr>
 </table>
 </c:if>	
 <c:if test="${empty duties}">
-Person dont have any duties
+<spring:message code="label.personGotNoDuties"/>
 </c:if>
-
-
+</div>
+</div>
 </body>
 </html>

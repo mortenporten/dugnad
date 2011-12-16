@@ -63,6 +63,12 @@ public class FestivalBoImpl implements FestivalBo {
 		Festival festival = findFestivalByName(festivalName);
 		return (List<Duty>) festival.getDuties();
 	}
+
+	@Override
+	public void updateFestival(Festival festival) {
+		festivalDao.updateFestival(festival);
+		
+	}
 	
 	
 }

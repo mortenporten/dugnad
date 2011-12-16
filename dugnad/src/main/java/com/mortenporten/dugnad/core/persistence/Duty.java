@@ -22,6 +22,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity(name = "Duty")
@@ -113,6 +114,7 @@ public class Duty implements Serializable{
 	}
 	
 	@Column(name="Name")
+	@NotBlank
 	public String getName() {
 		return name;
 	}

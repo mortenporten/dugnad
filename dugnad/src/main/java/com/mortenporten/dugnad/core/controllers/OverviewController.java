@@ -18,7 +18,7 @@ import com.mortenporten.dugnad.core.persistence.Person;
 
 @Controller
 @RequestMapping("/{festivalName}/overview/*")
-@SessionAttributes({"chosenPerson"})
+@SessionAttributes({"chosenPerson", "hours", "duties"})
 public class OverviewController {
 	
 	@Autowired

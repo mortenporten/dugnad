@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mortenporten.dugnad.core.dao.FestivalDao;
 import com.mortenporten.dugnad.core.persistence.Duty;
@@ -56,7 +57,16 @@ public class FestivalDaoImpl extends CustomHibernateDAOsupport implements Festiv
 		List list = getHibernateTemplate().find(
                 "from Festival where Name=?",festivalName
            );
+			if(list.isEmpty()){
+				return null;
+			}
 			return (Festival)list.get(0);
+	}
+
+	@Override
+	public void updateFestival(Festival festival) {
+		getHibernateTemplate().update(festival);
+		
 	}
 
 	
