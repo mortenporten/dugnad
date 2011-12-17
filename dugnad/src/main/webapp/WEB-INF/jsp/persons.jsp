@@ -33,9 +33,9 @@
 		
 		<div  class="span-14 append-bottom">
 		
-		<button id="add" hidden="true"><spring:message code="button.addPerson" /></button>
+		<button id="add" ><spring:message code="button.addPerson" /></button>
 		</div>		
-			<div id="form" class="span-14">
+			<div id="form" hidden="true" class="span-14">
 			
 			<h3><spring:message code="button.addPerson" /></h3>
 			<p><spring:message code="label.required.fields" /> <img src='<c:url value="/resources/style/css/img/required-field.png" />'/></p>
@@ -112,10 +112,10 @@ $("#add").click(function () {
 	$("#add").hide("slow");
   });
 $(document).ready(function() {
-	if($("span").text() == "")
+	if(!$("span").text() == "")
 	$("#form").hide("fast");
-	if($("span").text() == "")
-	$("#add").show("fast");
+	if(!$("span").text() == "")
+	$("#add").hide("fast");
 	});
 </script>
 </body>

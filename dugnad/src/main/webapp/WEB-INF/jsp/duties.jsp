@@ -176,10 +176,10 @@
  	<%@ include file="/WEB-INF/jsp/header-all.jsp" %>
  
 <div  class="span-14 append-bottom">
-	<button id="add" hidden="true"><spring:message code="button.addDuty" /></button>
+	<button id="add" ><spring:message code="button.addDuty" /></button>
 </div>
 
-<div id="form" class="span-21 append-bottom">
+<div id="form" hidden="true" class="span-21 append-bottom">
  
 <h3><spring:message code="header.addDuty"/></h3>
  <p><spring:message code="label.required.fields" /> <img src='<c:url value="/resources/style/css/img/required-field.png" />'/></p>
@@ -280,10 +280,10 @@ $("#add").click(function () {
 	$("#add").hide("slow");
   });
 $(document).ready(function() {
-	if(!$("span").hasClass("errors"))
-	$("#form").hide("fast");
-	if(!$("span").hasClass("errors"))
-	$("#add").show("fast");
+	if($("span").hasClass("errors"))
+	$("#form").show("fast");
+	if($("span").hasClass("errors"))
+	$("#add").hide("fast");
 	});
 </script>
 
