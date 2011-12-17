@@ -33,6 +33,10 @@
         <property name="basename" value="classpath:properties/messages" />
         <property name="defaultEncoding" value="UTF-8" />
     </bean> 
+    
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="nb_NO" />
+	</bean>
  	
  
  	<!-- Database Configuration -->
