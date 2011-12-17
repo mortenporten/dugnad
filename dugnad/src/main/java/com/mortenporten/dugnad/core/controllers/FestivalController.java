@@ -28,6 +28,7 @@ import com.mortenporten.dugnad.core.persistence.Festival;
 import com.mortenporten.dugnad.core.persistence.Person;
 import com.mortenporten.dugnad.validators.DutyValidator;
 import com.mortenporten.dugnad.validators.FestivalValidator;
+import com.mortenporten.dugnad.validators.util.ValidatorUtil;
 
 @Controller
 @RequestMapping("/festival")
@@ -37,14 +38,11 @@ public class FestivalController {
 	@Autowired
 	FestivalBo festivalBo;
 	@Autowired
-	Validator validator;
-	@Autowired
 	FestivalValidator festivalValidator;
+	@Autowired
+	ValidatorUtil validatorUtil;
 	
-	@InitBinder("festival")
-    protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(festivalValidator);
-    }
+	
 	
 	@RequestMapping("/festivals") 
     public String listFestivals(Map<String, Object> map) {
@@ -61,8 +59,8 @@ public class FestivalController {
 			BindingResult result){
 		
 		
-		BindException errors = new BindException(result);
-		validator.validate(festival,errors);
+		validatorUtil.setValidator(festivalValidator);
+		validatorUtil.validate(festival, result);
 		
 		
 		 if(result.hasErrors())  
@@ -114,8 +112,8 @@ public class FestivalController {
 	    public String editedPerson(@Valid @ModelAttribute("festival")
 	    Festival festival, BindingResult result) {
 	    	
-	    	BindException errors = new BindException(result);
-			validator.validate(festival,errors);
+	    	validatorUtil.setValidator(festivalValidator);
+			validatorUtil.validate(festival, result);
 			
 	    	if(result.hasErrors())  
 	    	    {  

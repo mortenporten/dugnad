@@ -21,9 +21,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Digits;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity(name = "Duty")
 public class Duty implements Serializable{
@@ -132,6 +135,8 @@ public class Duty implements Serializable{
 		this.description = description;
 	}
 	
+	
+	@Digits(fraction = 0, integer = 8)
 	@Column(name = "Required")
 	public Integer getRequired() {
 		return required;

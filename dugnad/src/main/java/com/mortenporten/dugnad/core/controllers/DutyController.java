@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -26,6 +27,7 @@ import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Festival;
 import com.mortenporten.dugnad.core.persistence.Person;
 import com.mortenporten.dugnad.validators.DutyValidator;
+import com.mortenporten.dugnad.validators.util.ValidatorUtil;
 
 @Controller
 @RequestMapping("/{festivalName}/duty")
@@ -39,12 +41,11 @@ public class DutyController {
 	@Autowired
 	PersonBo personBo;
 	@Autowired
+	DutyValidator dutyValidator;
+	@Autowired
+	ValidatorUtil validatorUtil;
+	@Autowired
 	Validator validator;
-	
-	@InitBinder("duty")
-    protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(new DutyValidator());
-    }
 
 	
 	@RequestMapping("/duties") 
@@ -60,19 +61,20 @@ public class DutyController {
     }
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addDuty(@PathVariable("festivalName")
-    String festivalName, @Valid @ModelAttribute("duty")
-    Duty duty, BindingResult result) {
+    public String addDuty( @Valid @ModelAttribute("duty")
+    Duty duty, BindingResult result, @PathVariable("festivalName")
+    String festivalName) {
     	
-		BindException errors = new BindException(result);
-		validator.validate(duty,errors);
+		validatorUtil.setValidator(dutyValidator);
+		validatorUtil.validate(duty, result);
+		
 		
 		if(result.hasErrors())  
     	    {  
     	       return "duties";  
     	    } 
     	
-    	 removeOrFindResposible(duty);
+    	 removeOrFindResponsible(duty);
 		
 		
     	Festival festival = festivalBo.findFestivalByName(festivalName);
@@ -111,21 +113,21 @@ public class DutyController {
     String festivalName,@Valid @ModelAttribute("duty")
     Duty duty, BindingResult result, ModelMap map) {
  
-		BindException errors = new BindException(result);
-		validator.validate(duty,errors);
+		validatorUtil.setValidator(dutyValidator);
+		validatorUtil.validate(duty, result);
 		
 		if(result.hasErrors()){
 			return "editDuty";
 		}
 		
-		removeOrFindResposible(duty);
+		removeOrFindResponsible(duty);
 		
 		dutyBo.updateDuty(duty);
 		
         return "redirect:/" + festivalName + "/duty/duties";
     }
 	
-	private void removeOrFindResposible(Duty duty) {
+	private void removeOrFindResponsible(Duty duty) {
 		if(duty.getResponsible().getPersonId() != null){
     		 Person person = personBo.findPersonById(Integer.toString(duty.getResponsible().getPersonId()));
     		 duty.setResponsible(person);

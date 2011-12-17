@@ -26,22 +26,7 @@
 <body>
 	<div class="container">
 
-		<h1>
-			<img src='<c:url value="/resources/style/css/img/roots.jpg" />'
-				height="150px" width="830px" alt="" />
-		</h1>
-
-		<div class="topMenu">
-			<div class="menu">
-				<a href="/dugnad/index"><spring:message code="menu.home" /></a>
-			</div>
-			<div class="menu">
-				<a href="/dugnad/festival/festivals"><spring:message code="menu.festivals" /></a>
-			</div>
-			<div class="menu">
-				<a href="logOut"><spring:message code="menu.logOut" /></a>
-			</div>
-		</div>
+	<%@ include file="/WEB-INF/jsp/header.jsp" %>
 
 		
 		<div class="span-16">
@@ -53,6 +38,7 @@
 			<div id="form" class="span-14">
 			
 			<h3><spring:message code="button.addPerson" /></h3>
+			<p><spring:message code="label.required.fields" /> <img src='<c:url value="/resources/style/css/img/required-field.png" />'/></p>
 			<form:form id="addPerson" method="post" action="add.html" commandName="person">
 
 				<table>
@@ -60,14 +46,14 @@
 						<td><form:label path="firstName">
 								<spring:message code="label.firstName" />
 							</form:label></td>
-						<td><form:input path="firstName" /></td>
+						<td><form:input path="firstName" /><img src='<c:url value="/resources/style/css/img/required-field.png" />'/></td>
 						<td><form:errors cssClass="errors" path="firstName" /></td>
 					</tr>
 					<tr>
 						<td><form:label path="lastName">
 								<spring:message code="label.lastName" />
 							</form:label></td>
-						<td><form:input path="lastName" /></td>
+						<td><form:input path="lastName" /><img src='<c:url value="/resources/style/css/img/required-field.png" />'/></td>
 						<td><form:errors cssClass="errors" path="lastName" /></td>
 					</tr>
 					<tr>
@@ -81,7 +67,7 @@
 						<td><form:label path="telephone">
 								<spring:message code="label.telephone" />
 							</form:label></td>
-						<td><form:input path="telephone" /></td>
+						<td><form:input path="telephone" /><img src='<c:url value="/resources/style/css/img/required-field.png" />'/></td>
 						<td><form:errors cssClass="errors" path="telephone" /></td>
 					</tr>
 					<tr>
@@ -92,8 +78,8 @@
 		
 		</div>
 		<div class="span-16">
-			<h3><spring:message code="menu.persons" /></h3>
 			<c:if test="${!empty persons}">
+			<h3><spring:message code="menu.persons" /></h3>
 				<table class="data">
 					<tr>
 						<th><spring:message code="label.firstName" /></th>
@@ -113,6 +99,9 @@
 						</tr>
 					</c:forEach>
 				</table>
+			</c:if>
+			<c:if test="${empty persons}">
+			<p><spring:message code="label.no.persons"/></p>
 			</c:if>
 			</div>
 		</div>

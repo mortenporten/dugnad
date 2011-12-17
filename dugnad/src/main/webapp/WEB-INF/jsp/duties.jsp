@@ -173,28 +173,7 @@
 <body>
 <div class="container"> 
  
- 		<h1>
-			<img src='<c:url value="/resources/style/css/img/roots.jpg" />'
-				height="150px" width="830px" alt="" />
-		</h1>
-
-		<div class="topMenu">
-			<div class="menu">
-				<a href="/dugnad/index"><spring:message code="menu.home" /></a>
-			</div>
-			<div class="menu">
-				<a href="/dugnad/festival/festivals"><spring:message code="menu.festivals" /></a>
-			</div>
-			<div class="menu">
-				<a href="/dugnad/person/persons"><spring:message code="menu.persons" /></a>
-			</div>
-			<div class="menu">
-				<a href="/dugnad/${festivalName}/overview/pickperson"><spring:message code="menu.personOverview" /></a>
-			</div>
-			<div class="menu">
-				<a href="logOut"><spring:message code="menu.logOut" /></a>
-			</div>
-		</div>
+ 	<%@ include file="/WEB-INF/jsp/header-all.jsp" %>
  
 <div  class="span-14 append-bottom">
 	<button id="add" hidden="true"><spring:message code="button.addDuty" /></button>
@@ -203,23 +182,26 @@
 <div id="form" class="span-21 append-bottom">
  
 <h3><spring:message code="header.addDuty"/></h3>
- 
+ <p><spring:message code="label.required.fields" /> <img src='<c:url value="/resources/style/css/img/required-field.png" />'/></p>
 <form:form method="post" id="addDuty" action="add.html" commandName="duty">
  
     <table>
     <tr>
         <td><form:label path="name"><spring:message code="label.name"/></form:label></td>
-        <td><form:input path="name" /></td><td><form:errors cssClass="errors" path="name" /></td>
+        <td><form:input path="name" /><img src='<c:url value="/resources/style/css/img/required-field.png" />'/>
+        </td><td><form:errors cssClass="errors" path="name" /></td>
     
         <td><form:label path="place"><spring:message code="label.place"/></form:label></td>
         <td><form:input path="place" /></td><td><form:errors cssClass="errors" path="place" /></td>
     </tr>
     <tr>
         <td><form:label path="start"><spring:message code="label.start"/></form:label></td>
-        <td><form:input id="start" path="start" /></td><td><form:errors cssClass="errors" path="start" /></td>
+        <td><form:input id="start" path="start" /><img src='<c:url value="/resources/style/css/img/required-field.png" />'/></td>
+        <td><form:errors cssClass="errors" path="start" /></td>
    
         <td><form:label path="end"><spring:message code="label.end"/></form:label></td>
-        <td><form:input id="end" path="end" /></td><td><form:errors cssClass="errors" path="end" /></td>
+        <td><form:input id="end" path="end" /><img src='<c:url value="/resources/style/css/img/required-field.png" />'/></td>
+        <td><form:errors cssClass="errors" path="end" /></td>
     </tr>
     <tr>
         <td><form:label  path="hours"><spring:message code="label.hours"/></form:label></td>
@@ -236,7 +218,7 @@
 
  <tr>
      <td><form:label path="responsible" > <spring:message code="label.responsible"/></form:label></td> 
-      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th> 
+      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th> 
      <form:select  id="combobox"  path="responsible.personId" >
 					<form:option value="" label="" />
 					<form:options items="${persons}"/>
@@ -254,7 +236,7 @@
 </div>
 
 
-<div class="span-21 last">
+<div class="span-21 last append-bottom">
 	<h3><spring:message code="header.duties"/></h3>
 <c:if  test="${!empty duties}">
 <table class="data">
@@ -276,7 +258,7 @@
         <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.end.time}"  /></td>
         <td>${d.hours}</td>
         <td>${d.required}</td>
-        <td>${d.responsible.firstName}</td>
+        <td>${d.responsible.firstName} ${d.responsible.lastName}</td>
         <td>${d.description}</td>
         <td><a href="delete/${d.dutyId}"><spring:message code="label.delete"/></a></td>
         <td><a href="edit/${d.dutyId}"><spring:message code="label.edit"/></a></td>
@@ -284,7 +266,11 @@
 </c:forEach>
 </table>
 </c:if>
+<c:if  test="${empty duties}">
+<p><spring:message code="label.festival.no.duties"/></p>
+</c:if>
 </div>
+
 </div>
 
 

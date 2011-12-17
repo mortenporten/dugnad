@@ -26,22 +26,7 @@
 <body>
 	<div class="container">
 
-		<h1>
-			<img src='<c:url value="/resources/style/css/img/roots.jpg" />'
-				height="150px" width="830px" alt="" />
-		</h1>
-
-		<div class="topMenu">
-			<div class="menu">
-				<a href="/dugnad/index"><spring:message code="menu.home" /></a>
-			</div>
-			<div class="menu">
-				<a href="/dugnad/festival/festivals"><spring:message code="menu.festivals" /></a>
-			</div>
-			<div class="menu">
-				<a href="logOut"><spring:message code="menu.logOut" /></a>
-			</div>
-		</div>
+		<%@ include file="/WEB-INF/jsp/header.jsp" %>
 
 		
 		<div class="span-16">

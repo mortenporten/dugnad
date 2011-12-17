@@ -3,11 +3,13 @@ package com.mortenporten.dugnad.validators;
 import java.util.Calendar;
 
 import org.joda.time.Period;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.mortenporten.dugnad.core.persistence.Duty;
 
+@Component("dutyValidator")
 public class DutyValidator implements Validator{
 
 	@Override
