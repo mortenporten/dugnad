@@ -52,9 +52,7 @@
     
     <tx:annotation-driven />
     
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-    
-    
+      
     <bean id="transactionManager"
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />

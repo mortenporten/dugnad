@@ -21,6 +21,6 @@
 				code="menu.persons" /></a>
 	</div>
 	<div class="menu">
-		<a href="logOut"><spring:message code="menu.logOut" /></a>
+		<a href="<c:url value="/j_spring_security_logout" />"><spring:message code="menu.logOut" /></a>
 	</div>
 </div>

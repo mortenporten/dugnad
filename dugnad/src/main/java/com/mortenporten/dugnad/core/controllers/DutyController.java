@@ -44,8 +44,7 @@ public class DutyController {
 	DutyValidator dutyValidator;
 	@Autowired
 	ValidatorUtil validatorUtil;
-	@Autowired
-	Validator validator;
+	
 
 	
 	@RequestMapping("/duties") 
