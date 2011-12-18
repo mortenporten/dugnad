@@ -163,7 +163,6 @@
         </td>
 		</form:form>
 		</div>
-		<button id="toggle"><spring:message code="label.showAllPersons" /></button>
 		</c:if>
 	</div>
 

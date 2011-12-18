@@ -1,8 +1,13 @@
 package com.mortenporten.dugnad.core.bo.impl;
 
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -106,5 +111,6 @@ public class DutyBoImpl implements DutyBo {
 			}
 		}
 	}
+
 	
 }

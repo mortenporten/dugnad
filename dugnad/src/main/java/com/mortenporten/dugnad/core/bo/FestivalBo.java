@@ -1,5 +1,6 @@
 package com.mortenporten.dugnad.core.bo;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.mortenporten.dugnad.core.persistence.Duty;

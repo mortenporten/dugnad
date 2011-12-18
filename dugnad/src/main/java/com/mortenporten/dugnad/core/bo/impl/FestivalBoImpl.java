@@ -1,6 +1,8 @@
 package com.mortenporten.dugnad.core.bo.impl;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,6 +67,7 @@ public class FestivalBoImpl implements FestivalBo {
 	}
 
 	@Override
+	@Transactional
 	public void updateFestival(Festival festival) {
 		festivalDao.updateFestival(festival);
 		

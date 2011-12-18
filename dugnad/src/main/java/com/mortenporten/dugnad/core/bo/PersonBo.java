@@ -29,4 +29,6 @@ public interface PersonBo {
 	void updatePerson(Person person);
 	
 	Double findHoursForPerson(List<Duty> duties);
+	
+	
 }

@@ -112,9 +112,9 @@ $("#add").click(function () {
 	$("#add").hide("slow");
   });
 $(document).ready(function() {
-	if(!$("span").text() == "")
-	$("#form").hide("fast");
-	if(!$("span").text() == "")
+	if($("span").hasClass("errors"))
+	$("#form").show("fast");
+	if($("span").hasClass("errors"))
 	$("#add").hide("fast");
 	});
 </script>
