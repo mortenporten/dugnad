@@ -16,7 +16,7 @@
 	href='<c:url value="/resources/style/css/style.css" />' type="text/css"
 	media="screen, projection" />
 
-    <title>Spring 3 MVC Series - Contact Manager | viralpatel.net</title>
+    <title><spring:message code="header.editFestival"/></title>
 </head>
 <body>
  

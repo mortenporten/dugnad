@@ -138,7 +138,7 @@
 	});
 	</script>
     
-    <title>Assign duties to persons</title>
+    <title><spring:message code="header.assign.duties"/></title>
 </head>
 <body>
 

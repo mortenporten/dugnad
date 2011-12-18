@@ -168,7 +168,7 @@
 			
 		</style>
   
-    <title>Spring 3 MVC Series - Contact Manager | viralpatel.net</title>
+    <title><spring:message code="header.editDuty"/></title>
 </head>
 <body>
 <div class="container"> 

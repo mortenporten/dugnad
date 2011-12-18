@@ -50,12 +50,12 @@
  
 		<table>
 			<tr>
-				<td>User:</td>
+				<td><spring:message code="label.user.name"/></td>
 				<td><input type='text' name='j_username' value=''>
 				</td>
 			</tr>
 			<tr>
-				<td>Password:</td>
+				<td><spring:message code="label.password"/></td>
 				<td><input type='password' name='j_password' />
 				</td>
 			</tr>

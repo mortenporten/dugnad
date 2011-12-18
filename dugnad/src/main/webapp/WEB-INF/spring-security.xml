@@ -10,7 +10,7 @@
 		<intercept-url pattern="/**" access="ROLE_USER" />
 		<intercept-url pattern="/login*" filters="none"/>
 		<intercept-url pattern="/resources/**" filters="none" />
-		<form-login login-page="/login" default-target-url="/index"
+		<form-login login-page="/login" default-target-url="/index" always-use-default-target="true"
 			authentication-failure-url="/loginfailed" />
 		<logout logout-success-url="/login" />
 	</http>
