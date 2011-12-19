@@ -82,9 +82,19 @@ public class FestivalBoImpl implements FestivalBo {
 	@Override
 	@Transactional(readOnly = true)
 	public Map<String, List<Duty>> findSchedule(String festivalName) {
-		Map<String, List<Duty>> days = new HashMap<String, List<Duty>>();
 		
 		List<Duty> duties = getAllDuties(festivalName);
+		Map<String, List<Duty>> days = getMapOfDutyDates(duties);
+		
+		return days;
+		
+	}
+	
+	
+	private Map<String, List<Duty>> getMapOfDutyDates(
+			List<Duty> duties) {
+		
+		Map<String, List<Duty>> days = new HashMap<String, List<Duty>>();
 		Collections.sort(duties);
 		
 		for(Duty d: duties){
@@ -100,7 +110,23 @@ public class FestivalBoImpl implements FestivalBo {
 			}
 		}
 		return days;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Map<String, List<Duty>> findAvailableDuties(String festivalName) {
 		
+		List<Duty> duties = getAllDuties(festivalName);
+		List<Duty> availableDuties = new ArrayList<Duty>();
+		for(Duty d : duties){
+	    	if(d.getRequired() != null && d.getRequired() > 0){
+	    		availableDuties.add(d);
+	    	}
+	    }
+		
+		Map<String, List<Duty>> days = getMapOfDutyDates(availableDuties);
+		
+		return days;
 	}
 	
 	

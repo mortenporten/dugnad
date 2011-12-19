@@ -145,9 +145,10 @@
 <div class="container"> 
  
  		<%@ include file="/WEB-INF/jsp/header-all.jsp" %>
+
  		
 <div class="span-18 append-bottom">
-<h3>${duty.name}</h3>
+<h2>${duty.name}</h2>
 <table>
 <tr>
     <th><spring:message code="label.place"/></th>

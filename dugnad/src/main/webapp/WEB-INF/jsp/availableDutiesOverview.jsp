@@ -29,16 +29,18 @@
 
 	<%@ include file="/WEB-INF/jsp/header-all.jsp" %>
 
-		<h2><spring:message code="title.day.overview"/></h2>
+		<h2><spring:message code="header.available.duties"/></h2>
 		<h3><spring:message code="header.choose.day"/></h3>
 		
 		<div class="span-16">
 		<c:if  test="${!empty daysDate}">
-					<ul>		
+			
+					<ul>
 					<c:forEach items="${daysDate}" var="dates">
-					<td><a href="overview/${dates}" class="large">${dates}  </a></td>
+					<td><a href="duties/${dates}" class="large">${dates}</a></td>
 					</c:forEach>	
 					</ul>
+				
 		</c:if>
 		<c:if  test="${empty daysDate}">
 		<p><spring:message code="label.no.duties.for.festival"/></p>

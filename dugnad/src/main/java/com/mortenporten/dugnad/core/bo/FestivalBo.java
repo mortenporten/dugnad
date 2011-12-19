@@ -18,4 +18,5 @@ public interface FestivalBo {
 	List<Duty> getAllDuties(String festivalName);
 	void updateFestival(Festival festival);
 	Map<String,List<Duty>> findSchedule(String festivalName);
+	Map<String,List<Duty>> findAvailableDuties(String festivalName);
 }

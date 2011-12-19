@@ -95,6 +95,12 @@ a:visited {
 	margin-top:-12px;
 	margin-bottom:20px;
 }
+.festivalchoosen {
+	float: right;
+	display: inline;
+	padding: 5px;
+	color: #787878;
+}
 
 .footer {
     margin-top: 10px;

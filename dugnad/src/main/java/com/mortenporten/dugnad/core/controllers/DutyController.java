@@ -103,6 +103,7 @@ public class DutyController {
  
 		Duty duty = dutyBo.findDutyById(dutyId);
 		map.addAttribute(duty);
+		map.put("persons", personBo.getAllPersonMap());
 		
         return "editDuty";
     }

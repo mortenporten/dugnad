@@ -167,30 +167,33 @@
 	</div>
 
 </div>
-<div class="span-16">
-
-<c:if  test="${!empty duties}">
+<div class="span-18">
 <h3><spring:message code="label.dutiesFor" /> ${chosenPerson.firstName} ${chosenPerson.lastName}</h3>
+<c:if  test="${!empty duties}">
+
 
 <table class="data">
 <tr>
 	<th><spring:message code="label.name"/></th>
 	<th><spring:message code="label.place"/></th>
-    <th><spring:message code="label.start"/></th>
-    <th><spring:message code="label.end"/></th>
+    <th><spring:message code="label.date"/></th>
+    <th><spring:message code="label.clock"/></th>
     <th><spring:message code="label.hours"/></th>
 </tr>
 <c:forEach items="${duties}" var="d">
     <tr>
         <td>${d.name}</td>
         <td>${d.place}</td>
-        <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.start.time}"  /></td>
-        <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.end.time}"  /></td>
+        <fmt:setLocale value="no" scope="session"/>
+        <td><fmt:formatDate type="date" pattern="EEEE dd-MM-yy" value="${d.start.time}"  /></td>
+        <td><fmt:formatDate type="date" pattern="HH:mm" value="${d.start.time}"  /> - 
+        	<fmt:formatDate type="date" pattern="HH:mm" value="${d.end.time}"  /></td>
         <td>${d.hours}</td>
         <td><a href="delete/${d.dutyId}"><spring:message code="label.remove"/></a></td>
 </c:forEach>
     <tr>
-    <td><spring:message code="label.hoursWorked"/></td><td></td><td></td><td></td><td>${hours}</td>
+    <td class="loud"><spring:message code="label.hoursWorked"/></td><td>
+    </td><td></td><td></td><td class="loud">${hours}</td>
    </tr>
 </table>
 </c:if>	

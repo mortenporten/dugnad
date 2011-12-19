@@ -43,6 +43,7 @@ public class OverviewController {
 			
 			map.put("hours", personBo.findHoursForPerson(duties));
 		}else{
+			map.put("chosenPerson", new Person());
 			map.put("duties", new ArrayList<Duty>());
 		}
 		

@@ -33,6 +33,7 @@
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>
 
 <div class="span-11">
+<h2><spring:message code="header.festivals" /></h2>
 
 <h3><spring:message code="header.addFestival" /></h3>
  <p><spring:message code="label.required.fields" /> <img src='<c:url value="/resources/style/css/img/required-field.png" />'/></p>
@@ -58,7 +59,7 @@
 <div class="span-14">
 
 <c:if  test="${!empty festivals}">
-<h3><spring:message code="header.festivals" /></h3>
+
 
 <table class="data">
 <tr>

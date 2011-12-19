@@ -33,6 +33,13 @@
 				code="menu.day.overview" /></a>
 	</div>
 	<div class="menu">
+		<a href="/dugnad/${festivalName}/available/duties"><spring:message
+				code="menu.day.available.duties" /></a>
+	</div>
+	<div class="menu">
 		<a href="<c:url value="/j_spring_security_logout" />"><spring:message code="menu.logOut" /></a>
+	</div>
+	<div class="festivalchoosen">
+		${festivalName}
 	</div>
 </div>

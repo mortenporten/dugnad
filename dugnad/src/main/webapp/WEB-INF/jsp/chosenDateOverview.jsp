@@ -29,19 +29,17 @@
 
 	<%@ include file="/WEB-INF/jsp/header-all.jsp" %>
 
-		
+		<h2><spring:message code="title.day.overview"/></h2>
 		<h3><spring:message code="header.choose.day"/></h3>
 		
 		<div class="span-20">
 		
 		
-				<table>
-					<tr>
+				<ul>		
 					<c:forEach items="${daysDate}" var="dates">
-					<td><a href="${dates}" class="large">${dates}</a></td>
+					<td><a href="overview/${dates}" class="large">${dates}  </a></td>
 					</c:forEach>	
-					</tr>
-				</table>
+				</ul>
 		</div>
 	
 <div class="span-21 last append-bottom ">
@@ -54,8 +52,8 @@
 <table class="data">
 <tr>
     <th><spring:message code="label.place"/></th>
-    <th><spring:message code="label.start"/></th>
-    <th><spring:message code="label.end"/></th>
+    <th><spring:message code="label.date"/></th>
+    <th><spring:message code="label.clock"/></th>
     <th><spring:message code="label.hours"/></th>
     <th><spring:message code="label.required"/></th>
     <th><spring:message code="label.responsible"/></th>
@@ -64,11 +62,12 @@
 
     <tr>
         <td>${d.place}</td>
-        <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.start.time}"  /></td>
-        <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.end.time}"  /></td>
+         <td>${date}</td>
+        <td><fmt:formatDate type="date" pattern="HH:mm" value="${d.start.time}"  /> -
+        <fmt:formatDate type="date" pattern="HH:mm" value="${d.end.time}"  /></td>
         <td>${d.hours}</td>
         <td>${d.required}</td>
-        <td>${d.responsible.firstName} ${d.responsible.lastName}</td>
+        <td>${d.responsible.firstName} ${d.responsible.lastName} <spring:message code="short.telephone"/> ${d.responsible.telephone}</td>
         <td>${d.description}</td>
     </tr>
 </table>

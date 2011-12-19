@@ -174,8 +174,10 @@
 <div class="container"> 
  
  	<%@ include file="/WEB-INF/jsp/header-all.jsp" %>
- 
+
+
 <div  class="span-14 append-bottom">
+	<h2><spring:message code="header.duties"/></h2>
 	<button id="add" ><spring:message code="button.addDuty" /></button>
 </div>
 
@@ -239,14 +241,14 @@
 
 
 <div class="span-21 last append-bottom">
-	<h3><spring:message code="header.duties"/></h3>
+	
 <c:if  test="${!empty duties}">
 <table class="data">
 <tr>
     <th><spring:message code="label.name"/></th>
     <th><spring:message code="label.place"/></th>
-    <th><spring:message code="label.start"/></th>
-    <th><spring:message code="label.end"/></th>
+    <th><spring:message code="label.date"/></th>
+    <th><spring:message code="label.clock"/></th>
     <th><spring:message code="label.hours"/></th>
     <th><spring:message code="label.required"/></th>
     <th><spring:message code="label.responsible"/></th>
@@ -256,8 +258,10 @@
     <tr>
         <td><a href="/dugnad/${festivalName}/assignduty/${d.dutyId}">${d.name}</a></td>
         <td>${d.place}</td>
-        <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.start.time}"  /></td>
-        <td><fmt:formatDate type="date" pattern="dd-MM-yy HH:mm" value="${d.end.time}"  /></td>
+	    <fmt:setLocale value="no" scope="session"/>
+        <td><fmt:formatDate type="date" pattern="EEEE dd-MM-yy" value="${d.start.time}"  /></td>
+        <td><fmt:formatDate type="date" pattern="HH:mm" value="${d.start.time}"  /> - 
+        	<fmt:formatDate type="date" pattern="HH:mm" value="${d.end.time}"  /></td>
         <td>${d.hours}</td>
         <td>${d.required}</td>
         <td>${d.responsible.firstName} ${d.responsible.lastName}</td>

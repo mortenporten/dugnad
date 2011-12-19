@@ -30,14 +30,15 @@
 
 		
 		<div class="span-16">
+		<h2><spring:message code="menu.persons" /></h2>
 		
 		<div  class="span-14 append-bottom">
 		
 		<button id="add" ><spring:message code="button.addPerson" /></button>
 		</div>		
 			<div id="form" hidden="true" class="span-14">
+			<h3><spring:message code="button.addPerson" /></h3>	
 			
-			<h3><spring:message code="button.addPerson" /></h3>
 			<p><spring:message code="label.required.fields" /> <img src='<c:url value="/resources/style/css/img/required-field.png" />'/></p>
 			<form:form id="addPerson" method="post" action="add.html" commandName="person">
 
@@ -79,7 +80,6 @@
 		</div>
 		<div class="span-16">
 			<c:if test="${!empty persons}">
-			<h3><spring:message code="menu.persons" /></h3>
 				<table class="data">
 					<tr>
 						<th><spring:message code="label.firstName" /></th>
