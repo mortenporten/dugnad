@@ -1,9 +1,15 @@
 package com.mortenporten.dugnad.core.bo.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,6 +76,30 @@ public class FestivalBoImpl implements FestivalBo {
 	@Transactional
 	public void updateFestival(Festival festival) {
 		festivalDao.updateFestival(festival);
+		
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Map<String, List<Duty>> findSchedule(String festivalName) {
+		Map<String, List<Duty>> days = new HashMap<String, List<Duty>>();
+		
+		List<Duty> duties = getAllDuties(festivalName);
+		Collections.sort(duties);
+		
+		for(Duty d: duties){
+			DateTime date = new DateTime(d.getStart().getTimeInMillis());
+			Locale locale = new Locale("no", "NO");
+			String onlyDate = date.toString("EEEE dd-MM-yy",locale);	
+			if(days.containsKey(onlyDate)){
+				days.get(onlyDate).add(d);
+			}else{
+				List<Duty> dutiesOnSameDate = new ArrayList<Duty>();
+				dutiesOnSameDate.add(d);
+				days.put(onlyDate, dutiesOnSameDate);
+			}
+		}
+		return days;
 		
 	}
 	

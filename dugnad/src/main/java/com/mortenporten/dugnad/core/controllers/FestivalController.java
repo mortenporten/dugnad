@@ -32,7 +32,7 @@ import com.mortenporten.dugnad.validators.util.ValidatorUtil;
 
 @Controller
 @RequestMapping("/festival")
-@SessionAttributes("festival")
+@SessionAttributes({"festival","festivals"})
 public class FestivalController {
 
 	@Autowired

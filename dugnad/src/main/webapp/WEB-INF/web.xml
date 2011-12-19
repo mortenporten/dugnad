@@ -68,4 +68,13 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+<context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>classpath:properties/log4j.properties</param-value>
+  </context-param>
+  
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+</listener>
+
 </web-app>

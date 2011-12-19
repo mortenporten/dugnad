@@ -36,11 +36,11 @@
 
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
 
-	<h3>Login with Username and Password (Custom Page)</h3>
+	<h3><spring:message code="header.login"/></h3>
  
 	<c:if test="${not empty error}">
 		<div class="errorblock">
-			Your login attempt was not successful, try again.<br /> Caused :
+			<spring:message code="label.login.failed"/><br /> 
 			${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 		</div>
 	</c:if>
@@ -61,7 +61,7 @@
 			</tr>
 			<tr>
 				<td colspan='2'><input name="submit" type="submit"
-					value="submit" />
+					value="<spring:message code="label.login"/>" />
 				</td>
 			</tr>
 		</table>

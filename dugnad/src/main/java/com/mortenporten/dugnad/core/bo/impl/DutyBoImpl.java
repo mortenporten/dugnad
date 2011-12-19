@@ -1,6 +1,7 @@
 package com.mortenporten.dugnad.core.bo.impl;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -96,12 +97,14 @@ public class DutyBoImpl implements DutyBo {
 	}
 
 	@Override
+	@Transactional
 	public void updateDuty(Duty duty) {
 		dutyDao.updateDuty(duty);
 		
 	}
 	
 	@Override
+	@Transactional
 	public void updateRequired(boolean add, Duty duty){
 		if(duty.getRequired() != null){
 			if(add){

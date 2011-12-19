@@ -185,10 +185,10 @@
 		  <td colspan="2">
             <input type="submit" value="<spring:message code="button.choose"/>"/>
         </td>
-        <td><form:errors path="personId" /></td>
+        <td><form:errors cssClass="errors" path="personId" /></td>
 		</form:form>
 		</div>
-		<button id="toggle"><spring:message code="label.showAllPeople"/></button>
+		
 		</c:if>
 	</div>
 	

@@ -29,6 +29,10 @@
 				code="menu.personOverview" /></a>
 	</div>
 	<div class="menu">
-		<a href=""<c:url value="/j_spring_security_logout" />""><spring:message code="menu.logOut" /></a>
+		<a href="/dugnad/${festivalName}/day/overview"><spring:message
+				code="menu.day.overview" /></a>
+	</div>
+	<div class="menu">
+		<a href="<c:url value="/j_spring_security_logout" />"><spring:message code="menu.logOut" /></a>
 	</div>
 </div>

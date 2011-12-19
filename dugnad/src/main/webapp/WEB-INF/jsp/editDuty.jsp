@@ -204,10 +204,13 @@
         <td><form:label  path="hours"><spring:message code="label.hours"/></form:label></td>
         <td><form:input  path="hours" /></td><td><form:errors cssClass="errors" path="hours" /></td>
     
-        <td><form:label  path="required"><spring:message code="label.required" /></form:label></td>
-        <td><form:input  path="required" /></td><td><form:errors cssClass="errors" path="required" /></td>
+    	<td><form:label  path="definedHours"><spring:message code="label.is.defined.hours"/></form:label></td>
+        <td><form:checkbox value="false" path="definedHours" /></td><td><form:errors cssClass="errors" path="definedHours" /></td>
     </tr>
     <tr>
+    	<td><form:label  path="required"><spring:message code="label.required" /></form:label></td>
+        <td><form:input  path="required" /></td><td><form:errors cssClass="errors" path="required" /></td>
+        
         <td><form:label path="description"><spring:message code="label.description"/></form:label></td>
         <td><form:textarea cssClass="textbox" path="description" /></td><td><form:errors cssClass="errors" path="description" /></td>
     </tr> 

@@ -19,11 +19,11 @@
 	 <link rel="stylesheet" media="all" href="<c:url value="/resources/jquery-ui/css/ui-lightness/jquery-ui-1.8.16.custom.css" />" type="text/css" />
  <script type="text/javascript" src="<c:url value="/resources/jquery/jquery-1.7/jquery-1.7.1.js" />"></script>
  <script type="text/javascript" src="<c:url value="/resources/jquery-ui/js/jquery-ui-1.8.16.custom.min.js" />"></script>
-	
-	
 
 
-    <title><spring:message code="header.festivals"/></title>
+
+
+<title><spring:message code="header.festivals"/></title>
 </head>
 <body>
  
@@ -67,7 +67,7 @@
 <c:forEach items="${festivals}" var="f">
     <tr>
         <td><a href="choose/${f.festivalName}">${f.festivalName}</a> </td>
-        <td><a href="delete/${f.festivalId}" id="delete" ><spring:message code="label.delete" /></a></td>
+        <td><a href="delete/${f.festivalId}" onclick="return deletechecked();" ><spring:message code="label.delete" /></a></td>
         <td><a href="edit/${f.festivalId}"><spring:message code="label.edit" /></a></td>
     </tr>
 </c:forEach>
@@ -83,15 +83,17 @@
 <div id="question"  hidden="true">
 <spring:message code="delete.festival.prompt" />
 </div>
-
 <script type="text/javascript">
-$(document).ready(
-		
-		$('#delete').click(function(){
-			  var answer = confirm($("#question").text());
-			  return answer;
-			})
-);
+function deletechecked()
+{
+    var answer = confirm($("#question").text())
+    if (answer){
+        document.messages.submit();
+    }
+    
+    return false;  
+}
 </script>
+
 </body>
 </html>

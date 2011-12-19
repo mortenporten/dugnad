@@ -22,6 +22,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -29,7 +32,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 @Entity(name = "Duty")
-public class Duty implements Serializable{
+public class Duty implements Serializable, Comparable<Duty>{
 
 	/**
 	 * 
@@ -39,6 +42,7 @@ public class Duty implements Serializable{
 	private Calendar start;
 	private Calendar end;
 	private Double hours;
+	private Boolean definedHours;
 	private Festival festival;
 	private String place;
 	private Person responsible;
@@ -80,6 +84,7 @@ public class Duty implements Serializable{
 	}
 	
 	@Column(name = "Hours", precision=10, scale=2)
+	@Min(value=0)
 	public Double getHours() {
 		return hours;
 	}
@@ -135,7 +140,8 @@ public class Duty implements Serializable{
 		this.description = description;
 	}
 	
-	
+	@Min(0)
+	@Max(25)
 	@Digits(fraction = 0, integer = 8)
 	@Column(name = "Required")
 	public Integer getRequired() {
@@ -153,6 +159,26 @@ public class Duty implements Serializable{
 	
 	public void setPersons(Collection<Person> persons) {
 		this.persons = persons;
+	}
+	
+	@Column(name = "Definedhours")
+	public Boolean getDefinedHours() {
+		return definedHours;
+	}
+	public void setDefinedHours(Boolean definedHours) {
+		this.definedHours = definedHours;
+	}
+	@Override
+	public int compareTo(Duty duty) {
+		int compare = this.start.compareTo(duty.start);
+		if(compare == 0){
+			compare = this.end.compareTo(duty.end);
+			if(compare == 0){
+				return this.name.compareTo(duty.getName());
+			}
+			return compare;
+		}
+		return compare;
 	}
 	
 	

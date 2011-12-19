@@ -44,13 +44,17 @@ public class DutyValidator implements Validator{
 			e.rejectValue("end", "start.after.end");
 		}
 		
-		if(duty.getHours() == null){
+		if(!duty.getDefinedHours()){
 			long duration = end.getTimeInMillis() - start.getTimeInMillis();
 			Period period = new Period(duration);
 			double hoursAndMins = period.getHours() + (period.getMinutes() / 60.00 ); 
 			duty.setHours(hoursAndMins);
 		}
 		
+		
+		if(duty.getHours() > 24){
+			e.rejectValue("hours", "too.long.duty");
+		}
 		
 		
 	}

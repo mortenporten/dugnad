@@ -2,6 +2,7 @@ package com.mortenporten.dugnad.core.bo;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Festival;
@@ -16,4 +17,5 @@ public interface FestivalBo {
 	Festival findFestivalByName(String festivalName);
 	List<Duty> getAllDuties(String festivalName);
 	void updateFestival(Festival festival);
+	Map<String,List<Duty>> findSchedule(String festivalName);
 }

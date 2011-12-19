@@ -32,6 +32,9 @@ public class AssignDutyValidator {
 			if(!validate(duty, duties)){
 				result.rejectValue("personId", "overlapping.duty.personId");
 				}
+			if(duty.getRequired() != null && duty.getRequired() <= 0){
+				result.rejectValue("personId", "no.available.spots");
+			}
 			
 			
 			

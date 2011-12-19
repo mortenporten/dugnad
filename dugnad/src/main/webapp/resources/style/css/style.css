@@ -21,23 +21,23 @@ body {
     width: 830px;
 }
 
-h1 {
+ h1 {
     text-align: left;
     letter-spacing: 6px;
     font-size: 1.4em;
     color: #6ca7b2;
     font-weight: normal;
     width: 450px;
-}
+} 
 
-h2 {
+/* h2 {
     text-align: left;
     letter-spacing: 1px;
     font-size: 1.0em;
     color: #6ca7b2;
     font-weight: normal;
     width: 450px;
-}
+} */
 
 a:link {
    color: #6ca7b2;
