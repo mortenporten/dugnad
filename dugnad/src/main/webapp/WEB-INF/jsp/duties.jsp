@@ -176,7 +176,7 @@
  	<%@ include file="/WEB-INF/jsp/header-all.jsp" %>
 
 
-<div  class="span-14 append-bottom">
+<div  class="span-21 append-bottom">
 	<h2><spring:message code="header.duties"/></h2>
 	<button id="add" ><spring:message code="button.addDuty" /></button>
 </div>

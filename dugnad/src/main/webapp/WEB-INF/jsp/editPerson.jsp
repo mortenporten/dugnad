@@ -21,7 +21,7 @@
  <script type="text/javascript" src="<c:url value="/resources/jquery-ui/js/jquery-ui-1.8.16.custom.min.js" />"></script>	
 
 
-<title><spring:message code="menu.persons" /></title>
+<title><spring:message code="header.editPerson" /></title>
 </head>
 <body>
 	<div class="container">
@@ -34,7 +34,7 @@
 			
 			
 			
-			<h3><spring:message code="button.addPerson" /></h3>
+			<h3><spring:message code="header.editPerson" /></h3>
 			<form:form id="addPerson" method="post" action="edited.html" commandName="person">
 
 				<table>

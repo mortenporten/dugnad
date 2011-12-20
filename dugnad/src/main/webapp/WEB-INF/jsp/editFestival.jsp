@@ -27,7 +27,7 @@
 
 <div class="span-11">
 
-<h3><spring:message code="header.editFestival" /></h3>
+<h2><spring:message code="header.editFestival" /></h2>
  
 <form:form method="post" action="edited.html" commandName="festival">
  
@@ -38,13 +38,12 @@
         <td><form:errors cssClass="errors" path="festivalName" /></td>
     </tr>
    
-  
-    <tr>
+</table>
+ 	<tr>
         <td colspan="2">
             <input type="submit" value="<spring:message code="label.edit" />"/>
         </td>
     </tr>
-</table>
 </form:form>
 
 </div>

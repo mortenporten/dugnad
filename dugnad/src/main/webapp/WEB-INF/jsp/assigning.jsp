@@ -148,7 +148,7 @@
 
  		
 <div class="span-18 append-bottom">
-<h2>${duty.name}</h2>
+<h2><spring:message code="header.add.persons.to"/> ${duty.name}</h2>
 <table>
 <tr>
     <th><spring:message code="label.place"/></th>

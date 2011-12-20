@@ -32,7 +32,7 @@
 		
 		<%@ include file="/WEB-INF/jsp/header.jsp" %>
 
-<div class="span-11">
+<div class="span-11 append-bottom">
 <h2><spring:message code="header.festivals" /></h2>
 
 <h3><spring:message code="header.addFestival" /></h3>
@@ -45,14 +45,12 @@
         <td><form:input path="festivalName" /><img src='<c:url value="/resources/style/css/img/required-field.png" />'/></td>
         <td><form:errors cssClass="errors" path="festivalName" /></td>
     </tr>
-   
-  
-    <tr>
+   </table>
+   <tr>
         <td colspan="2">
             <input type="submit" value="<spring:message code="label.add" />"/>
         </td>
     </tr>
-</table>
 </form:form>
 
 </div>

@@ -15,9 +15,7 @@
 		<logout logout-success-url="/login" />
 	</http>
  	
- 	<beans:bean id="anonymousAuthenticationProvider" class="org.springframework.security.authentication.AnonymousAuthenticationProvider">
- 		<beans:property name="key" value="ROLE_ANONYMOUS"/>
-	</beans:bean>
+ 	
  
 	<authentication-manager>
         <authentication-provider>

@@ -181,7 +181,7 @@
 
 <div id="form" class="span-21 append-bottom">
  
-<h3><spring:message code="header.addDuty"/></h3>
+<h3><spring:message code="header.editDuty"/></h3>
  
 <form:form method="post" id="addDuty" action="edited.html" commandName="duty">
  
