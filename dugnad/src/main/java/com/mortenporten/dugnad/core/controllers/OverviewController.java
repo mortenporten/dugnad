@@ -1,7 +1,10 @@
 package com.mortenporten.dugnad.core.controllers;
 
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,38 +16,72 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.mortenporten.dugnad.core.bo.DutyBo;
 import com.mortenporten.dugnad.core.bo.PersonBo;
+import com.mortenporten.dugnad.core.bo.TicketBo;
 import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Person;
+import com.mortenporten.dugnad.core.persistence.Ticket;
 
 @Controller
 @RequestMapping("/{festivalName}/overview/*")
-@SessionAttributes({"chosenPerson", "hours", "duties"})
+@SessionAttributes({"chosenPerson", "hours", "dutiesOverview","ticket"})
 public class OverviewController {
 	
 	@Autowired
 	PersonBo personBo;
 	@Autowired
 	DutyBo dutyBo;
+	@Autowired
+	TicketBo ticketBo;
+	
 	
 	@RequestMapping("/pickperson")
-	public String pickPerson(@ModelAttribute("person") Person person,
+	public String pickPerson(ModelMap map) {
+
+			map.put("dutiesOverview", new ArrayList<Duty>());
+			map.put("chosenPerson", new Person());
+			map.put("ticket", new Ticket());
+			map.put("ticketsMap", new HashMap<String, String>());
+			map.put("tickets",  new ArrayList<Ticket>());
+		
+		
+		map.put("persons", personBo.getAllPersonMap());
+		map.put("person", new Person());
+		
+		return "personOverview";
+	}
+	
+	@RequestMapping("/personpicked")
+	public String personPicked(@ModelAttribute("person") Person person,
 			@PathVariable("festivalName")
-    		String festivalName,
+    		String festivalName, @ModelAttribute("chosenPerson") Person chosenPerson,
 			ModelMap map) {
 
 		if(person.getPersonId() != null){
 			String personId = Integer.toString(person.getPersonId());
 			
 			List<Duty> duties = personBo.findAllDutiesForPersonForFestival(personId, festivalName);
-			map.put("duties", duties);
+			map.put("dutiesOverview", duties);
 			
 			person = personBo.findPersonById(personId);
 			map.put("chosenPerson", person);
+			map.put("ticket", new Ticket());
+			map.put("ticketsMap", ticketBo.getMapOfTicketsForFestival(festivalName));
+			map.put("tickets", person.getTickets());
+			
+			Locale locale = new Locale("no", "NO");
+			Currency cur = Currency.getInstance(locale);
+			map.put("nok",cur.getSymbol());
 			
 			map.put("hours", personBo.findHoursForPerson(duties));
-		}else{
-			map.put("chosenPerson", new Person());
-			map.put("duties", new ArrayList<Duty>());
+		}else if(chosenPerson.getPersonId() != null){
+			List<Duty> duties = personBo.findAllDutiesForPersonForFestival(
+					Integer.toString(chosenPerson.getPersonId()), 
+					festivalName);
+			chosenPerson = personBo.findPersonById(
+					Integer.toString(chosenPerson.getPersonId()));
+			map.put("dutiesOverview", duties);
+			map.put("tickets", chosenPerson.getTickets() );
+			map.put("ticketsMap", ticketBo.getMapOfTicketsForFestival(festivalName));
 		}
 		
 		map.put("persons", personBo.getAllPersonMap());
@@ -64,10 +101,35 @@ public class OverviewController {
 		dutyBo.deletePerson(Integer.toString(chosenPerson.getPersonId()), dutyId); 
 		map.put("person", chosenPerson);
 		
-		return "redirect:/" + festivalName + "/overview/pickperson";
+		return "redirect:/" + festivalName + "/overview/personpicked";
 	}
 	
+	@RequestMapping("/add")
+	public String addTicket2Person(
+			@PathVariable("festivalName")
+    		String festivalName,
+			@ModelAttribute("chosenPerson") Person chosenPerson,
+			@ModelAttribute("ticket") Ticket ticket,
+			ModelMap map) {
+        
+		personBo.updatePerson(chosenPerson);
+		
+		personBo.addTicket(Integer.toString(ticket.getTicketId()), 
+				Integer.toString(chosenPerson.getPersonId()));
+		
+		
+		
+		return "redirect:/" + festivalName + "/overview/personpicked";
+	}
 	
-	
-	
+	@RequestMapping("/remove/{ticketId}")
+	public String removeTicketFromPerson(@PathVariable("ticketId")
+    	String ticketId, @PathVariable("festivalName")
+		String festivalName, @ModelAttribute("chosenPerson") 
+		Person chosenPerson){
+		
+		personBo.deleteTicket(ticketId, Integer.toString(chosenPerson.getPersonId()));
+		
+		return "redirect:/" + festivalName + "/overview/personpicked";
+	}
 }

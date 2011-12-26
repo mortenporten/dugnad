@@ -153,7 +153,7 @@
 		<c:if test="${!empty persons}">
 			<div class="ui-widget">
 				<label><spring:message code="label.choosePerson" /></label> 
-			<form:form method="post" action="pickperson" commandName="person">
+			<form:form method="post" action="personpicked" commandName="person">
 			<form:select id="combobox" path="personId">
 					  <form:option value="NONE" label="" />
 					  <form:options items="${persons}" />
@@ -169,7 +169,7 @@
 </div>
 <div class="span-18">
 <h3><spring:message code="label.dutiesFor" /> ${chosenPerson.firstName} ${chosenPerson.lastName}</h3>
-<c:if  test="${!empty duties}">
+<c:if  test="${!empty dutiesOverview}">
 
 
 <table class="data">
@@ -180,7 +180,7 @@
     <th><spring:message code="label.clock"/></th>
     <th><spring:message code="label.hours"/></th>
 </tr>
-<c:forEach items="${duties}" var="d">
+<c:forEach items="${dutiesOverview}" var="d">
     <tr>
         <td>${d.name}</td>
         <td>${d.place}</td>
@@ -197,10 +197,77 @@
    </tr>
 </table>
 </c:if>	
-<c:if test="${empty duties}">
+<c:if test="${empty dutiesOverview}">
 <spring:message code="label.personGotNoDuties"/>
 </c:if>
 </div>
 </div>
+<c:if test="${!empty ticketsMap}">
+<button id="add" ><spring:message code="button.deliver.ticket" /></button>
+<div class="span-14 last append-bottom" hidden="true" id="form">
+<h3><spring:message code="header.deliver.new.ticket"/></h3>
+<form method="post" action="add.html">
+		
+		<table>
+ 			<tr><form:label path="ticket.ticketId">
+ 			<spring:message code="label.choose.ticket" /></form:label> 
+				<td><form:select path="ticket.ticketId">
+					  <form:options items="${ticketsMap}" />
+				     </form:select>
+               	</td>
+			</tr>
+		</table>
+		<td><form:label path="chosenPerson.paid">
+		<spring:message code="label.paid" />
+		</form:label></td>
+		<form:input path="chosenPerson.paid" name="paid"/>
+	
+		<tr>
+			<td colspan="2"><input type="submit" value="<spring:message code="button.deliver" />" /></td>
+		</tr>
+	</form>
+
+
+</div>
+</c:if>
+<c:if test="${empty ticketsMap}">
+<spring:message code="label.festival.no.tickets"/>
+</c:if>
+<div class="span-14 last append-bottom">
+	
+<c:if  test="${!empty tickets}">
+<h3><spring:message code="header.delivered.to"/>: ${chosenPerson.firstName} ${chosenPerson.lastName}</h3>
+<p class="loud">${chosenPerson.firstName} ${chosenPerson.lastName} <spring:message code="para.paid.for.tickets"/>: ${chosenPerson.paid} ${nok}  </p>
+<table class="data">
+<tr>
+    <th><spring:message code="label.ticket.type"/></th>
+    <th><spring:message code="label.ticket.date"/></th>
+</tr>
+<c:forEach items="${tickets}" var="t">
+    <tr>
+        <td>${t.ticketType}</td>
+	    <fmt:setLocale value="no" scope="session"/>
+        <td><fmt:formatDate type="date" pattern="EEEE dd-MM-yy" value="${t.date.time}"  /></td>
+        <td><a href="remove/${t.ticketId}"><spring:message code="label.remove"/></a></td>
+    </tr>
+</c:forEach>
+</table>
+</c:if>
+<c:if  test="${empty tickets}">
+<p>person have not gotten his tickets</p>
+</c:if>
+</div>
+<script type="text/javascript">	
+$("#add").click(function () {
+	$("#form").show("slow");
+	$("#add").hide("slow");
+  });
+$(document).ready(function() {
+	if($("span").hasClass("errors"))
+	$("#form").show("fast");
+	if($("span").hasClass("errors"))
+	$("#add").hide("fast");
+	});
+</script>
 </body>
 </html>

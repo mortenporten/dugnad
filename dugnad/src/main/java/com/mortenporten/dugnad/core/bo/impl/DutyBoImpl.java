@@ -109,7 +109,7 @@ public class DutyBoImpl implements DutyBo {
 		if(duty.getRequired() != null){
 			if(add){
 				duty.setRequired(duty.getRequired() + 1);
-			}else{
+			}else if(duty.getRequired() > 0){
 				duty.setRequired(duty.getRequired() - 1);
 			}
 		}

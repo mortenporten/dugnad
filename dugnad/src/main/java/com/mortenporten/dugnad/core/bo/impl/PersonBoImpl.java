@@ -12,10 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mortenporten.dugnad.core.bo.DutyBo;
 import com.mortenporten.dugnad.core.bo.FestivalBo;
 import com.mortenporten.dugnad.core.bo.PersonBo;
+import com.mortenporten.dugnad.core.bo.TicketBo;
 import com.mortenporten.dugnad.core.dao.PersonDao;
 import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Festival;
 import com.mortenporten.dugnad.core.persistence.Person;
+import com.mortenporten.dugnad.core.persistence.Ticket;
 
 @Service("personBo")
 public class PersonBoImpl implements PersonBo {
@@ -26,7 +28,8 @@ public class PersonBoImpl implements PersonBo {
 	DutyBo dutyBo;
 	@Autowired
 	FestivalBo festivalBo;
-	
+	@Autowired
+	TicketBo ticketBo;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -113,11 +116,13 @@ public class PersonBoImpl implements PersonBo {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public boolean containsPerson(Person person) {
 		return personDao.containsPerson(person);
 	}
 
 	@Override
+	@Transactional
 	public void updatePerson(Person person) {
 		personDao.updatePerson(person);
 		
@@ -132,6 +137,25 @@ public class PersonBoImpl implements PersonBo {
 			}
 		}
 		return hours;
+	}
+
+	@Override
+	@Transactional
+	public void addTicket(String ticketId, String personId) {
+		Ticket ticket = ticketBo.findTicketById(ticketId);
+		Person person = findPersonById(personId);
+		person.getTickets().add(ticket);
+		
+	}
+
+	@Override
+	@Transactional
+	public void deleteTicket(String ticketId, String personId) {
+		Person person = findPersonById(personId);
+		Ticket ticket = ticketBo.findTicketById(ticketId);
+		
+		person.getTickets().remove(ticket);
+		
 	}
 
 

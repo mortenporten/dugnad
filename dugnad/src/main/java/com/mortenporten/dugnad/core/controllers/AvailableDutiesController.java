@@ -1,5 +1,6 @@
 package com.mortenporten.dugnad.core.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ public class AvailableDutiesController {
 	public String getAvailableDutiesToShow(@PathVariable("festivalName") String festivalName,
 			ModelMap map){
 		
+		
 		Map<String, List<Duty>> days = festivalBo.findAvailableDuties(festivalName);
 		map.addAttribute("daysDate", days.keySet());
 		
@@ -35,8 +37,9 @@ public class AvailableDutiesController {
 			@PathVariable("festivalName") String festivalName,
 			ModelMap map){
 		
+		
 		Map<String, List<Duty>> days = festivalBo.findAvailableDuties(festivalName);
-		map.addAttribute("daysDate", days.keySet());
+		map.addAttribute("daysDate",days.keySet());
 		map.addAttribute("date", date);
 		map.addAttribute("duties", days.get(date));
 		

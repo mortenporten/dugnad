@@ -27,6 +27,7 @@ class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 		<value>com.mortenporten.dugnad.core.persistence.Person</value>
 		<value>com.mortenporten.dugnad.core.persistence.Festival</value>
 		<value>com.mortenporten.dugnad.core.persistence.Duty</value>
+		<value>com.mortenporten.dugnad.core.persistence.Ticket</value>
 	</list>
     </property>
  

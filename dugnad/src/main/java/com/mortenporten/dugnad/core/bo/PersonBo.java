@@ -30,5 +30,9 @@ public interface PersonBo {
 	
 	Double findHoursForPerson(List<Duty> duties);
 	
+	void addTicket(String ticketId, String personId);
+	
+	void deleteTicket(String ticketId, String personId);
+	
 	
 }

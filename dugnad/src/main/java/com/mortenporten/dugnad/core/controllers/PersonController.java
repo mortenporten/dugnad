@@ -58,7 +58,7 @@ public class PersonController {
 	    }
 	    
 	    @RequestMapping("/delete/{personId}")
-	    public String deleteContact(@PathVariable("personId")
+	    public String deletePerson(@PathVariable("personId")
 	    String personId) {
 	 
 	       personBo.deletePerson(personId);

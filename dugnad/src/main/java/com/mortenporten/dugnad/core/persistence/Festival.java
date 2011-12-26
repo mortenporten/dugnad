@@ -58,7 +58,5 @@ public class Festival implements Serializable {
 	public void setDuties(Collection<Duty> duties) {
 		this.duties = duties;
 	}
-	
-	
-	
+		
 }

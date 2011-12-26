@@ -30,6 +30,8 @@ public class DayOverviewController {
 		
 		Map<String, List<Duty>> days = festivalBo.findSchedule(festivalName);
 		map.addAttribute("daysDate", days.keySet());
+	
+		
 		
 		return "dayOverview";
 		

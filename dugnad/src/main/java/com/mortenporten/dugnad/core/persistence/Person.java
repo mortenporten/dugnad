@@ -2,13 +2,16 @@ package com.mortenporten.dugnad.core.persistence;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 
@@ -35,8 +38,9 @@ public class Person implements java.io.Serializable {
 	private String lastName;
 	private String telephone;
 	private String email;
+	private BigDecimal paid;
 	private Collection<Duty> duties;
-
+	private Collection<Ticket> tickets;
 
 
 	@Id
@@ -94,6 +98,15 @@ public class Person implements java.io.Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Column(name=("Paid"), precision=10, scale=2)
+	public BigDecimal getPaid() {
+		return paid;
+	}
+	
+	public void setPaid(BigDecimal paid) {
+		this.paid = paid;
+	}
 
 
 	@ManyToMany(mappedBy="persons")
@@ -107,7 +120,16 @@ public class Person implements java.io.Serializable {
 		this.duties = duties;
 	}
 	
-	
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	public Collection<Ticket> getTickets() {
+		return tickets;
+	}
+
+
+	public void setTickets(Collection<Ticket> tickets) {
+		this.tickets = tickets;
+	}
 	
 	
 	

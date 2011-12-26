@@ -25,6 +25,10 @@
 				code="menu.duties" /></a>
 	</div>
 	<div class="menu">
+		<a href="/dugnad/${festivalName}/ticket/tickets"><spring:message
+				code="menu.tickets" /></a>
+	</div>
+	<div class="menu">
 		<a href="/dugnad/${festivalName}/overview/pickperson"><spring:message
 				code="menu.personOverview" /></a>
 	</div>
