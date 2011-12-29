@@ -23,7 +23,6 @@ public class FestivalValidator implements Validator{
 	@Override
 	public void validate(Object obj, Errors e) {
 		Festival festival = (Festival) obj;
-		System.out.println(festival.getFestivalName());
 		
 		if(festival.getFestivalName() != null){
 			if(!festival.getFestivalName().equals("")){

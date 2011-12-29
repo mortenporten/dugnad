@@ -36,7 +36,8 @@
 		<c:if  test="${!empty daysDate}">
 					<ul>		
 					<c:forEach items="${daysDate}" var="dates">
-					<td><a href="overview/${dates}" class="large">${dates}  </a></td>
+					<td><a href="overview/${dates}" class="large">${dates}  </a> 
+					<a href="overview/pdf/${dates}" class="large">PDF -</a></td>
 					</c:forEach>	
 					</ul>
 		</c:if>

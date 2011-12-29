@@ -84,7 +84,6 @@ public class TicketBoImpl implements TicketBo {
 		for(Ticket t : tickets){
 			
 			if(festivalName.equals(t.getFestival().getFestivalName())){
-				System.out.println("yessss");
 				DateTime date = new DateTime(t.getDate().getTimeInMillis());
 				Locale locale = new Locale("no", "NO");
 				String onlyDate = date.toString("EEEE dd-MM-yy",locale);

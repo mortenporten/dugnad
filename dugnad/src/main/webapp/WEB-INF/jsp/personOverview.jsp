@@ -161,6 +161,7 @@
 		  <td colspan="2">
             <input type="submit" value="<spring:message code="button.choose" />"/>
         </td>
+        <td><form:errors cssClass="errors" path="personId" /></td>
 		</form:form>
 		</div>
 		</c:if>
@@ -203,7 +204,9 @@
 </div>
 </div>
 <c:if test="${!empty ticketsMap}">
+<p>
 <button id="add" ><spring:message code="button.deliver.ticket" /></button>
+</p>
 <div class="span-14 last append-bottom" hidden="true" id="form">
 <h3><spring:message code="header.deliver.new.ticket"/></h3>
 <form method="post" action="add.html">
@@ -236,7 +239,7 @@
 <div class="span-14 last append-bottom">
 	
 <c:if  test="${!empty tickets}">
-<h3><spring:message code="header.delivered.to"/>: ${chosenPerson.firstName} ${chosenPerson.lastName}</h3>
+<h3><spring:message code="header.delivered.to"/> ${chosenPerson.firstName} ${chosenPerson.lastName}:</h3>
 <p class="loud">${chosenPerson.firstName} ${chosenPerson.lastName} <spring:message code="para.paid.for.tickets"/>: ${chosenPerson.paid} ${nok}  </p>
 <table class="data">
 <tr>

@@ -59,5 +59,12 @@
     </bean>
  	
  	<mvc:resources mapping="/resources/**" location="/resources/" />
+ 	   
+  
+<bean id="excelViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+  <property name="order" value="1"/>
+  <property name="location" value="/WEB-INF/spring-pdf-views.xml"/>
+</bean>
+  
   
 </beans>

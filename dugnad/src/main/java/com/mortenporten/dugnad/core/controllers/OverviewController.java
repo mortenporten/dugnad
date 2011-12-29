@@ -6,9 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +26,7 @@ import com.mortenporten.dugnad.core.persistence.Ticket;
 
 @Controller
 @RequestMapping("/{festivalName}/overview/*")
-@SessionAttributes({"chosenPerson", "hours", "dutiesOverview","ticket"})
+@SessionAttributes({"chosenPerson", "hours", "dutiesOverview","ticket", "nok", "persons"})
 public class OverviewController {
 	
 	@Autowired
@@ -46,17 +49,26 @@ public class OverviewController {
 		
 		map.put("persons", personBo.getAllPersonMap());
 		map.put("person", new Person());
+		Locale locale = new Locale("no", "NO");
+		Currency cur = Currency.getInstance(locale);
+		map.put("nok",cur.getSymbol());
 		
 		return "personOverview";
 	}
 	
 	@RequestMapping("/personpicked")
 	public String personPicked(@ModelAttribute("person") Person person,
-			@PathVariable("festivalName")
+			BindingResult result, @PathVariable("festivalName")
     		String festivalName, @ModelAttribute("chosenPerson") Person chosenPerson,
-			ModelMap map) {
+    		BindingResult chosenResult, ModelMap map) {
 
+		if(result.hasErrors()){
+			return "personOverview";
+		}
+		
+		
 		if(person.getPersonId() != null){
+			
 			String personId = Integer.toString(person.getPersonId());
 			
 			List<Duty> duties = personBo.findAllDutiesForPersonForFestival(personId, festivalName);
@@ -67,13 +79,10 @@ public class OverviewController {
 			map.put("ticket", new Ticket());
 			map.put("ticketsMap", ticketBo.getMapOfTicketsForFestival(festivalName));
 			map.put("tickets", person.getTickets());
-			
-			Locale locale = new Locale("no", "NO");
-			Currency cur = Currency.getInstance(locale);
-			map.put("nok",cur.getSymbol());
-			
 			map.put("hours", personBo.findHoursForPerson(duties));
+		
 		}else if(chosenPerson.getPersonId() != null){
+			
 			List<Duty> duties = personBo.findAllDutiesForPersonForFestival(
 					Integer.toString(chosenPerson.getPersonId()), 
 					festivalName);

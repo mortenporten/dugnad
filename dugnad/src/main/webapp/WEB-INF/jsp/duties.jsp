@@ -252,7 +252,7 @@
     <th><spring:message code="label.hours"/></th>
     <th><spring:message code="label.required"/></th>
     <th><spring:message code="label.responsible"/></th>
-    <th><spring:message code="label.description"/></th>
+    
 </tr>
 <c:forEach items="${duties}" var="d">
     <tr>
@@ -265,10 +265,19 @@
         <td>${d.hours}</td>
         <td>${d.required}</td>
         <td>${d.responsible.firstName} ${d.responsible.lastName}</td>
-        <td>${d.description}</td>
         <td><a href="delete/${d.dutyId}"><spring:message code="label.delete"/></a></td>
         <td><a href="edit/${d.dutyId}"><spring:message code="label.edit"/></a></td>
     </tr>
+<c:if  test="${!empty d.description}">    
+    <tr></tr>
+    
+    <td>&nbsp;</td>
+    <td class="fattd"><spring:message code="label.description"/>:</td>
+   	<td colspan="5">${d.description}</td>
+   	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+</c:if>
+    
 </c:forEach>
 </table>
 </c:if>

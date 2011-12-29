@@ -37,7 +37,8 @@
 		
 				<ul>		
 					<c:forEach items="${daysDate}" var="dates">
-					<td><a href="${dates}" class="large">${dates}  </a></td>
+					<td><a href="${dates}" class="large">${dates}  </a> 
+					<a href="pdf/${dates}" class="large">PDF -</a></td>
 					</c:forEach>	
 				</ul>
 		</div>
