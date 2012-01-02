@@ -8,7 +8,8 @@
     xmlns:p="http://www.springframework.org/schema/p"
     xmlns:tx="http://www.springframework.org/schema/tx"
     xmlns:util="http://www.springframework.org/schema/util"
-    xmlns:mvc="http://www.springframework.org/schema/mvc" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:task="http://www.springframework.org/schema/task" 
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -16,7 +17,8 @@
         http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-        http://www.springframework.org/schema/mvc  http://www.springframework.org/schema/mvc/spring-mvc.xsd" >
+        http://www.springframework.org/schema/mvc  http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
  
    
  
@@ -52,6 +54,8 @@
     
     <tx:annotation-driven />
     
+    <task:annotation-driven />
+    
       
     <bean id="transactionManager"
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -65,6 +69,30 @@
   <property name="order" value="1"/>
   <property name="location" value="/WEB-INF/spring-pdf-views.xml"/>
 </bean>
-  
+
+<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<property name="host" value="smtp.gmail.com" />
+	<property name="port" value="587" />
+	<property name="username" value="morten.hoeiland@gmail.com" />
+	<property name="password" value="" />
+ 
+	<property name="javaMailProperties">
+	   <props>
+       	   <prop key="mail.smtp.auth">true</prop>
+       	   <prop key="mail.smtp.starttls.enable">true</prop>
+       </props>
+	</property>
+</bean>
+
+<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+      <property name="velocityProperties">
+         <value>
+          resource.loader=class
+          class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+         </value>
+      </property>
+</bean>
+ 
+ 
   
 </beans>
