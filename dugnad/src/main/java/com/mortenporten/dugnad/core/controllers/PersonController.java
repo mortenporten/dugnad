@@ -16,18 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.mortenporten.dugnad.core.bo.AssociationBo;
 import com.mortenporten.dugnad.core.bo.PersonBo;
+import com.mortenporten.dugnad.core.persistence.Association;
 import com.mortenporten.dugnad.core.persistence.Person;
 
 @Controller
 @RequestMapping("/person/*")
-@SessionAttributes({"person","persons"})
+@SessionAttributes({"person","persons", "associationsMap"})
 public class PersonController {
 
 	@Autowired
 	private PersonBo personBo;
-	
-	
+	@Autowired
+	private AssociationBo associationBo;
 	 
 	    
 	 
@@ -36,6 +38,7 @@ public class PersonController {
 	 
 	        map.put("persons",personBo.findAllPersons());
 	        map.put("person", new Person());
+	        map.put("associationsMap", associationBo.getAllAssociationsMap());
 	        
 	        return "persons";
 	    }
@@ -44,14 +47,26 @@ public class PersonController {
 	    public String addPerson(@Valid @ModelAttribute("person")
 	    Person person, BindingResult result) {
 	    	
-	    	 if(result.hasErrors())  
+	    	if(result.hasErrors())  
 	    	    {  
 	    	        return "persons";  
 	    	    } 
 	    	
+	    	Integer associationId = person.getAssociation().getAssociationId(); 
+	    	if(associationId < 0){
+	    		person.setAssociation(null);
+	    	}else{
+	    		Association association = associationBo.findAssociationById(
+	    				Integer.toString(associationId));
+	    		person.setAssociation(association);
+	    	}
+	    	 
+	        personBo.addPerson(person);
 	        
-	        	personBo.addPerson(person);
-	       
+	        if(associationId > 0){
+	    		associationBo.addPerson(Integer.toString(person.getPersonId()),
+	    				Integer.toString(associationId));
+	    		}
 	    	 
 	 
 	        return "redirect:persons";
