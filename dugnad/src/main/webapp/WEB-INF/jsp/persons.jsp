@@ -71,6 +71,15 @@
 						<td><form:input path="telephone" /><img src='<c:url value="/resources/style/css/img/required-field.png" />'/></td>
 						<td><form:errors cssClass="errors" path="telephone" /></td>
 					</tr>
+					<tr><td><form:label path="association">
+ 						<spring:message code="label.choose.ticket" /></form:label> </td>
+						<td><form:select path="association.associationId">
+						<form:option value="-1" label="" />
+					  	<form:options items="${associationsMap}" />
+				     	</form:select>
+				     	<td><form:errors cssClass="errors" path="association.associationId" /></td>
+               			</td>
+					</tr>
 					<tr>
 						<td colspan="2"><input type="submit" value="<spring:message code="label.add" />" /></td>
 					</tr>
@@ -86,6 +95,7 @@
 						<th><spring:message code="label.lastName" /></th>
 						<th><spring:message code="label.email" /></th>
 						<th><spring:message code="label.telephone" /></th>
+						<th><spring:message code="label.association" /></th>
 						<th>&nbsp;</th>
 					</tr>
 					<c:forEach items="${persons}" var="p">
@@ -94,6 +104,7 @@
 							<td>${p.lastName}</td>
 							<td>${p.email}</td>
 							<td>${p.telephone}</td>
+							<td>${p.association.associationName}</td>
 							<td><a href="delete/${p.personId}"><spring:message code="label.delete" /></a></td>
 							<td><a href="edit/${p.personId}"><spring:message code="label.edit" /></a></td>
 						</tr>

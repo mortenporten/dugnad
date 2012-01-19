@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
@@ -41,6 +42,7 @@ public class Person implements java.io.Serializable {
 	private BigDecimal paid;
 	private Collection<Duty> duties;
 	private Collection<Ticket> tickets;
+	private Association association;
 
 
 	@Id
@@ -129,6 +131,16 @@ public class Person implements java.io.Serializable {
 
 	public void setTickets(Collection<Ticket> tickets) {
 		this.tickets = tickets;
+	}
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	public Association getAssociation() {
+		return association;
+	}
+
+
+	public void setAssociation(Association association) {
+		this.association = association;
 	}
 	
 	

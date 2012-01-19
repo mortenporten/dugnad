@@ -55,10 +55,6 @@ public class PersonController {
 	    	Integer associationId = person.getAssociation().getAssociationId(); 
 	    	if(associationId < 0){
 	    		person.setAssociation(null);
-	    	}else{
-	    		Association association = associationBo.findAssociationById(
-	    				Integer.toString(associationId));
-	    		person.setAssociation(association);
 	    	}
 	    	 
 	        personBo.addPerson(person);

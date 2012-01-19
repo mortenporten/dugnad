@@ -9,6 +9,7 @@
 </h1>
 
 <div class="topMenu">
+
 	<div class="menu">
 		<a href="/dugnad/index"><spring:message code="menu.home" /></a>
 	</div>
@@ -19,6 +20,10 @@
 	<div class="menu">
 		<a href="/dugnad/person/persons"><spring:message
 				code="menu.persons" /></a>
+	</div>
+	<div class="menu">
+		<a href="/dugnad/association/associations"><spring:message
+				code="menu.associations" /></a>
 	</div>
 	<div class="menu">
 		<a href="/dugnad/${festivalName}/duty/duties"><spring:message
