@@ -131,10 +131,12 @@ ul.topnav {
 	padding: 0 20px;
 	margin: 0;
 	float: left;
-	width: 920px;
+	width: 790px;
 	background: #222;
 	font-size: 1.2em;
 	background: url(img/topnav_bg.gif) repeat-x;
+	margin-top:-12px;
+	margin-bottom:20px;
 }
 ul.topnav li {
 	float: left;

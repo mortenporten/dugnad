@@ -8,49 +8,19 @@
 		height="150px" width="830px" alt="" />
 </h1>
 
-<div class="topMenu">
-	<div class="menu">
-		<a href="/dugnad/index"><spring:message code="menu.home" /></a>
-	</div>
-	<div class="menu">
-		<a href="/dugnad/festival/festivals"><spring:message
-				code="menu.festivals" /></a>
-	</div>
-	<div class="menu">
-		<a href="/dugnad/person/persons"><spring:message
-				code="menu.persons" /></a>
-	</div>
-	<div class="menu">
-		<a href="/dugnad/association/associations"><spring:message
-				code="menu.associations" /></a>
-	</div>
-	<div class="menu">
-		<a href="<c:url value="/j_spring_security_logout" />"><spring:message code="menu.logOut" /></a>
-	</div>
-</div>
-
-
 
 <ul class="topnav">
-    <li><a href="#">Home</a></li>
+    <li><a href="/dugnad/index"><spring:message code="menu.home" /></a></li>
     <li>
-        <a href="#">Tutorials</a>
-        <ul class="subnav">
-            <li><a href="#">Sub Nav Link</a></li>
-            <li><a href="#">Sub Nav Link</a></li>
-        </ul>
+        <a href="/dugnad/festival/festivals"><spring:message
+				code="menu.festivals" /></a>
     </li>
     <li>
-        <a href="#">Resources</a>
-        <ul class="subnav">
-            <li><a href="#">Sub Nav Link</a></li>
-            <li><a href="#">Sub Nav Link</a></li>
-        </ul>
+        <a href="/dugnad/person/persons"><spring:message
+				code="menu.persons" /></a>
     </li>
-    <li><a href="#">About Us</a></li>
-    <li><a href="#">Advertise</a></li>
-    <li><a href="#">Submit</a></li>
-    <li><a href="#">Contact Us</a></li>
+    <li><a href="<c:url value="/j_spring_security_logout" />"><spring:message code="menu.logOut" /></a></li>
+    
 </ul>
 <script type="text/javascript">
 $(document).ready(function(){
