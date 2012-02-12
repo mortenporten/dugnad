@@ -12,5 +12,6 @@ public interface TicketDao {
 	Ticket findTicketById(String ticketId);
 	List<Ticket> getAllTickets();
 	void updateTicket(Ticket ticket);
+	List<Ticket> getTicketsByFestivalId(String festivalId);
 
 }

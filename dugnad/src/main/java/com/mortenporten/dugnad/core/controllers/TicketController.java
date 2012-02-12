@@ -28,9 +28,10 @@ public class TicketController {
 	FestivalBo festivalBo;
 	  
 		@RequestMapping("/tickets") 
-	    public String listTickets( ModelMap map) {
+	    public String listTickets( ModelMap map, @PathVariable("festivalName")
+    	String festivalName) {
 	 
-	        map.put("tickets",ticketBo.getAllTickets());
+	        map.put("tickets",ticketBo.getTicketsByFestival(festivalName));
 	        map.put("ticket", new Ticket());
 	        
 	        return "tickets";

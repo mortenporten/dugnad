@@ -48,7 +48,6 @@ a:link {
 a:link:hover {
    color: #6ca7b2;
    font-weight: normal;
-   border-bottom-style: dotted;
    border-bottom-color: #000000;
    border-bottom-width: 1px;
 }
@@ -188,4 +187,8 @@ html ul.topnav li ul.subnav li a {
 html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
 	background: #222 url(img/dropdown_linkbg.gif) no-repeat 10px center;
 }
+
+
+
+
 

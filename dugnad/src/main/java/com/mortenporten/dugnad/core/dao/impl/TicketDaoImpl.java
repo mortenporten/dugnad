@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mortenporten.dugnad.core.dao.TicketDao;
+import com.mortenporten.dugnad.core.persistence.Association;
 import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Ticket;
 import com.mortenporten.dugnad.core.persistence.util.CustomHibernateDAOsupport;
@@ -46,4 +47,11 @@ public class TicketDaoImpl extends CustomHibernateDAOsupport implements TicketDa
 		
 	}
 
+	@Override
+	public List<Ticket> getTicketsByFestivalId(String festivalId) {
+		List<Ticket> list = getHibernateTemplate().find(
+                "from Association where festival_Id=?", festivalId
+           );
+			return list;
+	}
 }

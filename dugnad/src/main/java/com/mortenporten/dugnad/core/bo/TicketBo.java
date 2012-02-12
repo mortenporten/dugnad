@@ -18,6 +18,7 @@ public interface TicketBo {
 	List<Person> findAllPersonsAssigned2Ticket(Ticket ticket);
 	void updateTicket(Ticket ticket);
 	Map<String,String> getMapOfTicketsForFestival(String festivalName);
+	List<Ticket> getTicketsByFestival(String festivalName);
 	
 
 }

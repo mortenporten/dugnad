@@ -17,34 +17,42 @@
     <li>
         <a href="/dugnad/person/persons"><spring:message
 				code="menu.persons" /></a>
-				<ul class="subnav">
-            <li><a href="#">Sub Nav Link</a></li>
-            <li><a href="#">Sub Nav Link</a></li>
-        </ul>
     </li>
     <li>
-        <a href="/dugnad/association/associations"><spring:message
-				code="menu.associations" /></a>
+    	<a href=><spring:message
+				code="menu.elements" /></a>
+    
+    <ul class="subnav">
+    		<li>
+        		<a href="/dugnad/association/associations"><spring:message
+					code="menu.associations" /></a>
+    		</li>
+    		<li>
+        		<a href="/dugnad/${festivalName}/duty/duties"><spring:message
+					code="menu.duties" /></a>
+    		</li>
+    		<li>
+        		<a href="/dugnad/${festivalName}/ticket/tickets"><spring:message
+					code="menu.tickets" /></a>
+    		</li>
+    	</ul>
     </li>
     <li>
-        <a href="/dugnad/${festivalName}/duty/duties"><spring:message
-				code="menu.duties" /></a>
-    </li>
-    <li>
-        <a href="/dugnad/${festivalName}/ticket/tickets"><spring:message
-				code="menu.tickets" /></a>
-    </li>
-    <li>
-       	<a href="/dugnad/${festivalName}/day/overview"><spring:message
-				code="menu.day.overview" /></a>
+       	<a href=><spring:message
+				code="menu.overviews" /></a>
 		
 		<ul class="subnav">
+			<li><a href="/dugnad/${festivalName}/day/overview"><spring:message
+				code="menu.day.overview" /></a></li>
             
             <li><a href="/dugnad/${festivalName}/overview/pickperson"><spring:message
 				code="menu.personOverview" /></a></li>
             
             <li><a href="/dugnad/${festivalName}/available/duties"><spring:message
 				code="menu.day.available.duties" /></a></li>
+			
+			<li><a href="/dugnad/${festivalName}/association/pickassociation"><spring:message
+				code="menu.association.overview" /></a></li>
         </ul>
 	</li>
     

@@ -76,7 +76,7 @@ public class TicketBoImpl implements TicketBo {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Map<String, String> getMapOfTicketsForFestival(String festivalName) {
 		Map<String,String> map = new HashMap<String, String>();
 		List<Ticket> tickets = getAllTickets();
@@ -94,7 +94,12 @@ public class TicketBoImpl implements TicketBo {
 		return map;
 	}
 
-	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Ticket> getTicketsByFestival(String festivalName) {
+		Festival festival = festivalBo.findFestivalByName(festivalName);
+		return ticketDao.getTicketsByFestivalId(Integer.toString(festival.getFestivalId()));
+	}
 	
 
 }

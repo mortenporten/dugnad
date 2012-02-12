@@ -1,5 +1,6 @@
 package com.mortenporten.dugnad.core.bo.impl;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import com.mortenporten.dugnad.core.bo.AssociationBo;
 import com.mortenporten.dugnad.core.bo.PersonBo;
 import com.mortenporten.dugnad.core.dao.AssociationDao;
 import com.mortenporten.dugnad.core.persistence.Association;
+import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Person;
 
 @Service("associationBo")
@@ -75,5 +77,19 @@ public class AssociationBoImpl implements AssociationBo {
 		association.getAssociationPersons().add(person);
 		
 	}
-
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Duty> getAllDutiesForAssociationByFestivalName(String associationId, String festivalName) {
+		Association association = findAssociationById(associationId);
+		List<Person> persons = (List<Person>) association.getAssociationPersons();
+		List<Duty> associationDuties = new ArrayList<Duty>();
+		
+		for(Person p: persons){
+			associationDuties.addAll(personBo.findAllDutiesForPersonForFestival(
+					Integer.toString(p.getPersonId()), festivalName));
+		}
+		
+		return associationDuties;
+	}
 }

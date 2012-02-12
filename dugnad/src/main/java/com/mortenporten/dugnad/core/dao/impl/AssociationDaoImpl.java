@@ -48,7 +48,6 @@ public class AssociationDaoImpl extends CustomHibernateDAOsupport implements Ass
 		getHibernateTemplate().update(association);
 		
 	}
-
 	
 
 }

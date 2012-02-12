@@ -13,5 +13,4 @@ public interface AssociationDao {
 	Association findAssociationById(String associationId);
 	List<Association> getAllAssociations();
 	void updateAssociation(Association association);
-	
 }

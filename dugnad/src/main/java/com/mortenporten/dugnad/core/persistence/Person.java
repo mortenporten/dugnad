@@ -133,7 +133,7 @@ public class Person implements java.io.Serializable {
 		this.tickets = tickets;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.REMOVE)
 	public Association getAssociation() {
 		return association;
 	}

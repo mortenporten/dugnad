@@ -52,6 +52,7 @@ public class Association implements Serializable {
 	public Collection<Person> getAssociationPersons() {
 		return associationPersons;
 	}
+	
 	public void setAssociationPersons(Collection<Person> associationPersons) {
 		this.associationPersons = associationPersons;
 	}
