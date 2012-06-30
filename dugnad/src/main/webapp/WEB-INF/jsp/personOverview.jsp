@@ -149,7 +149,9 @@
 	</script>
 
 	<div class="demo">
-
+<c:if test="${empty persons}">
+<p><spring:message code="label.no.persons"/></p>
+</c:if>
 		<c:if test="${!empty persons}">
 			<div class="ui-widget">
 				<label><spring:message code="label.choosePerson" /></label> 
@@ -220,10 +222,10 @@
                	</td>
 			</tr>
 		</table>
-		<td><form:label path="chosenPerson.paid">
+		<td><form:label path="paid.paid">
 		<spring:message code="label.paid" />
 		</form:label></td>
-		<form:input path="chosenPerson.paid" name="paid"/>
+		<form:input path="paid.paid" name="paid"/>
 	
 		<tr>
 			<td colspan="2"><input type="submit" value="<spring:message code="button.deliver" />" /></td>
@@ -240,7 +242,7 @@
 	
 <c:if  test="${!empty tickets}">
 <h3><spring:message code="header.delivered.to"/> ${chosenPerson.firstName} ${chosenPerson.lastName}:</h3>
-<p class="loud">${chosenPerson.firstName} ${chosenPerson.lastName} <spring:message code="para.paid.for.tickets"/>: ${chosenPerson.paid} ${nok}  </p>
+<p class="loud">${chosenPerson.firstName} ${chosenPerson.lastName} <spring:message code="para.paid.for.tickets"/>: ${paid.paid} ${nok}  </p>
 <table class="data">
 <tr>
     <th><spring:message code="label.ticket.type"/></th>
@@ -255,9 +257,9 @@
     </tr>
 </c:forEach>
 </table>
-</c:if>
 <c:if  test="${empty tickets}">
-<p>person have not gotten his tickets</p>
+<p><spring:message code="message.person.got.no.tickets"/></p>
+</c:if>
 </c:if>
 </div>
 <script type="text/javascript">	

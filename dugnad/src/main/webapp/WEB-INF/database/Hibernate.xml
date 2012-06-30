@@ -29,6 +29,7 @@ class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 		<value>com.mortenporten.dugnad.core.persistence.Duty</value>
 		<value>com.mortenporten.dugnad.core.persistence.Ticket</value>
 		<value>com.mortenporten.dugnad.core.persistence.Association</value>
+		<value>com.mortenporten.dugnad.core.persistence.Paid</value>
 	</list>
     </property>
  

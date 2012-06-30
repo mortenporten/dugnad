@@ -99,7 +99,7 @@
 </table>
 </c:if>
 <c:if  test="${empty associations}">
-<p><spring:message code="label.festival.no.tickets"/></p>
+<p><spring:message code="message.no.associations"/></p>
 </c:if>
 </div>
 

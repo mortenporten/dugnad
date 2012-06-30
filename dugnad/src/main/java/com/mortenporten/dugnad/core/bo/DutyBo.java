@@ -17,6 +17,7 @@ public interface DutyBo {
 	void deletePerson(String personId, String dutyId);
 	void updateDuty(Duty duty);
 	void updateRequired(boolean add, Duty duty);
+	void deleteResponsible(String personId);
 
 	
 }

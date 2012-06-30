@@ -66,6 +66,14 @@
 						<td><form:input path="telephone" /></td>
 						<td><form:errors cssClass="errors" path="telephone" /></td>
 					</tr>
+					<tr><td><form:label path="association">
+ 						<spring:message code="label.association" /></form:label> </td>
+						<td><form:select path="association.associationId">
+						<form:option value="-1" label="" />
+					  	<form:options items="${associationsMap}" />
+				     	</form:select>
+				     	<td><form:errors cssClass="errors" path="association.associationId" /></td>
+					</tr>
 					<tr>
 						<td colspan="2"><input type="submit" value="<spring:message code="label.edit" />" /></td>
 					</tr>

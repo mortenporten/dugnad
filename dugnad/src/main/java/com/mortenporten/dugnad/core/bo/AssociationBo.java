@@ -20,6 +20,9 @@ public interface AssociationBo {
 	Map<String,String> getAllAssociationsMap();
 	void addPerson(String personId, String associationId);
 	List<Duty> getAllDutiesForAssociationByFestivalName(String associationId,String festivalName);
+	void removePersonFromAssociation(String personId);
+	Double findHoursForAssociation(List<Duty> duties);
+
 
 	
 

@@ -84,11 +84,16 @@ public class TicketBoImpl implements TicketBo {
 		for(Ticket t : tickets){
 			
 			if(festivalName.equals(t.getFestival().getFestivalName())){
+				if( t.getDate() != null){
 				DateTime date = new DateTime(t.getDate().getTimeInMillis());
 				Locale locale = new Locale("no", "NO");
 				String onlyDate = date.toString("EEEE dd-MM-yy",locale);
 				map.put(Integer.toString(t.getTicketId()), 
 						t.getTicketType() + "," + onlyDate);
+				}else{
+				map.put(Integer.toString(t.getTicketId()), 
+							t.getTicketType());
+				}
 			}
 		}
 		return map;

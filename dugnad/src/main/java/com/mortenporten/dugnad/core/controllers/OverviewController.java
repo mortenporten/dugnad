@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.mortenporten.dugnad.core.bo.DutyBo;
+import com.mortenporten.dugnad.core.bo.FestivalBo;
+import com.mortenporten.dugnad.core.bo.PaidBo;
 import com.mortenporten.dugnad.core.bo.PersonBo;
 import com.mortenporten.dugnad.core.bo.TicketBo;
 import com.mortenporten.dugnad.core.persistence.Duty;
+import com.mortenporten.dugnad.core.persistence.Paid;
 import com.mortenporten.dugnad.core.persistence.Person;
 import com.mortenporten.dugnad.core.persistence.Ticket;
 
@@ -35,7 +38,10 @@ public class OverviewController {
 	DutyBo dutyBo;
 	@Autowired
 	TicketBo ticketBo;
-	
+	@Autowired 
+	PaidBo paidBo;
+	@Autowired
+	FestivalBo festivalBo;
 	
 	@RequestMapping("/pickperson")
 	public String pickPerson(ModelMap map) {
@@ -77,9 +83,14 @@ public class OverviewController {
 			person = personBo.findPersonById(personId);
 			map.put("chosenPerson", person);
 			map.put("ticket", new Ticket());
-			map.put("ticketsMap", ticketBo.getMapOfTicketsForFestival(festivalName));
-			map.put("tickets", person.getTickets());
+			map.put("tickets", personBo.getTicketsByFestivalNameAndPersonId(festivalName, Integer.toString(chosenPerson.getPersonId())));
 			map.put("hours", personBo.findHoursForPerson(duties));
+			Paid paid = personBo.findPaidByPersonAndFestival(personId, festivalName);
+			if(paid == null){
+				map.put("paid", new Paid());
+			}else{
+				map.put("paid",paid);
+			}
 		
 		}else if(chosenPerson.getPersonId() != null){
 			
@@ -89,12 +100,19 @@ public class OverviewController {
 			chosenPerson = personBo.findPersonById(
 					Integer.toString(chosenPerson.getPersonId()));
 			map.put("dutiesOverview", duties);
-			map.put("tickets", chosenPerson.getTickets() );
-			map.put("ticketsMap", ticketBo.getMapOfTicketsForFestival(festivalName));
+			map.put("tickets", personBo.getTicketsByFestivalNameAndPersonId(festivalName, Integer.toString(chosenPerson.getPersonId())) );
+			Paid paid = personBo.findPaidByPersonAndFestival(Integer.toString(chosenPerson.getPersonId()), festivalName);
+			if(paid == null){
+				map.put("paid", new Paid());
+			}else{
+				map.put("paid",paid);
+			}
+			
 		}
 		
 		map.put("persons", personBo.getAllPersonMap());
 		map.put("person", new Person());
+		map.put("ticketsMap", ticketBo.getMapOfTicketsForFestival(festivalName));
 		
 		return "personOverview";
 	}
@@ -118,10 +136,19 @@ public class OverviewController {
 			@PathVariable("festivalName")
     		String festivalName,
 			@ModelAttribute("chosenPerson") Person chosenPerson,
-			@ModelAttribute("ticket") Ticket ticket,
+			@ModelAttribute("ticket") Ticket ticket,@ModelAttribute("paid") Paid paid,
 			ModelMap map) {
         
+		Paid oldPaid =personBo.findPaidByPersonAndFestival(Integer.toString(chosenPerson.getPersonId()), festivalName);
+		if (oldPaid == null) {
+		paid.setFestival(festivalBo.findFestivalByName(festivalName));
+		paid.setPerson(chosenPerson);
+		chosenPerson.getReceipts().add(paid);
 		personBo.updatePerson(chosenPerson);
+		} else {
+			oldPaid.setPaid(paid.getPaid());
+			paidBo.updatePaid(oldPaid);
+		}
 		
 		personBo.addTicket(Integer.toString(ticket.getTicketId()), 
 				Integer.toString(chosenPerson.getPersonId()));

@@ -50,7 +50,7 @@ public class TicketDaoImpl extends CustomHibernateDAOsupport implements TicketDa
 	@Override
 	public List<Ticket> getTicketsByFestivalId(String festivalId) {
 		List<Ticket> list = getHibernateTemplate().find(
-                "from Association where festival_Id=?", festivalId
+                "from Ticket where festival_Id=?", festivalId
            );
 			return list;
 	}

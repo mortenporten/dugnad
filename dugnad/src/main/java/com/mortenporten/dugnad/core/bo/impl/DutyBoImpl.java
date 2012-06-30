@@ -92,9 +92,7 @@ public class DutyBoImpl implements DutyBo {
 		Person person = personBo.findPersonById(personId);
 		updateRequired(true, duty);
 		duty.getPersons().remove(person);
-		
-		
-	}
+		}
 
 	@Override
 	@Transactional
@@ -114,6 +112,19 @@ public class DutyBoImpl implements DutyBo {
 			}
 		}
 	}
-
+	
+	@Override
+	@Transactional
+	public void deleteResponsible(String personId) {
+		List<Duty> duties = getAllDuties();
+		for (Duty d : duties) {
+			if (d.getResponsible() != null) {
+				if (Integer.toString(d.getResponsible().getPersonId()).equals(
+						personId)) {
+					d.setResponsible(null);
+				}
+			}
+		}
+	}
 	
 }

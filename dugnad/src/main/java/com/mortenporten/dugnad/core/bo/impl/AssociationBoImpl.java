@@ -92,4 +92,33 @@ public class AssociationBoImpl implements AssociationBo {
 		
 		return associationDuties;
 	}
+	
+	@Override
+	@Transactional
+	public void removePersonFromAssociation(String personId) {
+		List<Association> associations = getAllAssociations();
+		
+		for(Association a: associations){
+			List<Person> persons = (List<Person>) a.getAssociationPersons();
+			for(Person p : persons){
+				if(Integer.toString(p.getPersonId()).equals(personId)){
+					a.getAssociationPersons().remove(p);
+				}
+			}
+		}
+		
+	}
+
+	@Override
+	public Double findHoursForAssociation(List<Duty> duties) {
+			Double hours = 0.00;
+			for(Duty d : duties){
+				if(d.getHours() != null){
+					hours+=d.getHours();
+				}
+			}
+			return hours;
+		
+	}
+	
 }

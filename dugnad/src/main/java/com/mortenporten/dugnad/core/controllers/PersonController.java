@@ -97,9 +97,23 @@ public class PersonController {
 	    		 return "editPerson";  
 	    	    }
 	    	 
-	    	personBo.updatePerson(person);
+	    	
+	    	 Integer associationId = person.getAssociation().getAssociationId(); 
+		    	if(associationId < 0){
+		    		associationBo.removePersonFromAssociation(Integer.toString(person.getPersonId()));
+		    		person.setAssociation(null);
+		    	}
+		    	 
+		    	personBo.updatePerson(person);
+		        
+		        if(associationId > 0){
+		        	associationBo.removePersonFromAssociation(Integer.toString(person.getPersonId()));
+		        	associationBo.addPerson(Integer.toString(person.getPersonId()),
+		    				Integer.toString(associationId));
+		    		}
 	    	 
-	    	return "redirect:/person/persons";
+	    	 
+	    	 return "redirect:/person/persons";
 	    }
 	    
 	

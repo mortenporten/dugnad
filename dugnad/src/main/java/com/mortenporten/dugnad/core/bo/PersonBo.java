@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.mortenporten.dugnad.core.persistence.Duty;
+import com.mortenporten.dugnad.core.persistence.Paid;
 import com.mortenporten.dugnad.core.persistence.Person;
+import com.mortenporten.dugnad.core.persistence.Ticket;
 
 public interface PersonBo {
 	
@@ -34,5 +36,8 @@ public interface PersonBo {
 	
 	void deleteTicket(String ticketId, String personId);
 	
+	Paid findPaidByPersonAndFestival(String personId, String festivalName);
+	
+	List<Ticket> getTicketsByFestivalNameAndPersonId(String festivalName, String personId);
 	
 }

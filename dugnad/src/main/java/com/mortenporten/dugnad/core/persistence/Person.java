@@ -39,10 +39,10 @@ public class Person implements java.io.Serializable {
 	private String lastName;
 	private String telephone;
 	private String email;
-	private BigDecimal paid;
 	private Collection<Duty> duties;
 	private Collection<Ticket> tickets;
 	private Association association;
+	private Collection<Paid> receipts;
 
 
 	@Id
@@ -100,15 +100,6 @@ public class Person implements java.io.Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	@Column(name=("Paid"), precision=10, scale=2)
-	public BigDecimal getPaid() {
-		return paid;
-	}
-	
-	public void setPaid(BigDecimal paid) {
-		this.paid = paid;
-	}
 
 
 	@ManyToMany(mappedBy="persons")
@@ -133,7 +124,7 @@ public class Person implements java.io.Serializable {
 		this.tickets = tickets;
 	}
 
-	@ManyToOne(cascade=CascadeType.REMOVE)
+	@ManyToOne()
 	public Association getAssociation() {
 		return association;
 	}
@@ -141,6 +132,17 @@ public class Person implements java.io.Serializable {
 
 	public void setAssociation(Association association) {
 		this.association = association;
+	}
+
+	@OneToMany(cascade=CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	public Collection<Paid> getReceipts() {
+		return receipts;
+	}
+
+
+	public void setReceipts(Collection<Paid> receipts) {
+		this.receipts = receipts;
 	}
 	
 	

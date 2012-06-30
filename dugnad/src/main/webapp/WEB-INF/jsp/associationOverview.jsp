@@ -29,7 +29,7 @@
 <%@ include file="/WEB-INF/jsp/header-all.jsp" %>
  
 <div class="span-16 append-bottom"> 
-<h3><spring:message code="header.overview" /></h3>
+<h3><spring:message code="header.overview.associations" /></h3>
  
 
 	<style>
@@ -149,10 +149,13 @@
 	</script>
 
 	<div class="demo">
+	<c:if  test="${empty associationsMap}">
+		<p><spring:message code="message.no.associations"/></p>
+	</c:if>
 
 		<c:if test="${!empty associationsMap}">
 			<div class="ui-widget">
-				<label><spring:message code="label.choosePerson" /></label> 
+				<label><spring:message code="label.choose.association" /></label> 
 			<form:form method="post" action="associationpicked" commandName="association">
 			<form:select id="combobox" path="associationId">
 					  <form:option value="NONE" label="" />
@@ -164,6 +167,9 @@
         <td><form:errors cssClass="errors" path="associationId" /></td>
 		</form:form>
 		</div>
+			<c:if  test="${empty associationDuties}">
+				<p><spring:message code="message.associations.has.no.duties"/></p>
+			</c:if>
 		</c:if>
 	</div>
 
@@ -198,9 +204,6 @@
 </table>
 </c:if>	
 
-<c:if test="${empty dutiesOverview}">
-<spring:message code="label.personGotNoDuties"/>
-</c:if>
 
 </div>
 

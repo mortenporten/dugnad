@@ -54,8 +54,11 @@ public class AssociationOverviewController {
 			String associationId = Integer.toString(association.getAssociationId());
 			association = associationBo.findAssociationById(associationId);
 			
-			map.put("associationDuties", associationBo.getAllDutiesForAssociationByFestivalName(
-					associationId, festivalName));
+			List<Duty> duties = associationBo.getAllDutiesForAssociationByFestivalName(
+					associationId, festivalName);
+			
+			map.put("associationDuties", duties);
+			map.put("hours", associationBo.findHoursForAssociation(duties));
 			map.put("chosenAssociation", association);
 		
 		}

@@ -9,13 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mortenporten.dugnad.core.bo.AssociationBo;
 import com.mortenporten.dugnad.core.bo.DutyBo;
 import com.mortenporten.dugnad.core.bo.FestivalBo;
 import com.mortenporten.dugnad.core.bo.PersonBo;
 import com.mortenporten.dugnad.core.bo.TicketBo;
 import com.mortenporten.dugnad.core.dao.PersonDao;
+import com.mortenporten.dugnad.core.persistence.Association;
 import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Festival;
+import com.mortenporten.dugnad.core.persistence.Paid;
 import com.mortenporten.dugnad.core.persistence.Person;
 import com.mortenporten.dugnad.core.persistence.Ticket;
 
@@ -30,6 +33,8 @@ public class PersonBoImpl implements PersonBo {
 	FestivalBo festivalBo;
 	@Autowired
 	TicketBo ticketBo;
+	@Autowired 
+	AssociationBo associationBo;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -58,6 +63,8 @@ public class PersonBoImpl implements PersonBo {
 		for(String s:duties){
 			dutyBo.deletePerson(personId, s);
 		}
+		dutyBo.deleteResponsible(personId);
+		removePersonFromAssociation(findPersonById(personId));
 		personDao.deletePerson(personId);
 		
 	}
@@ -159,6 +166,41 @@ public class PersonBoImpl implements PersonBo {
 	}
 
 
-		
+	@Transactional
+	private void removePersonFromAssociation(Person person){
+		for(Association a : associationBo.getAllAssociations()){
+			if(a.getAssociationPersons().contains(person)){
+				a.getAssociationPersons().remove(person);
+			}
+		}
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Paid findPaidByPersonAndFestival(String personId, String festivalName) {
+		 Person person = findPersonById(personId);
+		 for(Paid p : person.getReceipts()){
+			 if(p.getFestival().getFestivalName().equals(festivalName)){
+				 return p;
+			 }
+		 }
+		 return null;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Ticket> getTicketsByFestivalNameAndPersonId(
+			String festivalName, String personId) {
+		Person person =personDao.findPersonById(personId);
+		ArrayList<Ticket> list = new ArrayList<Ticket>();
+		for(Ticket t : person.getTickets()){
+			if(t.getFestival().getFestivalName().equals(festivalName)){
+				list.add(t);
+			}
+		}
+		return list;
+	}
+	
+	
 
 }
