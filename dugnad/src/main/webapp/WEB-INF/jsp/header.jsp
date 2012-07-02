@@ -19,6 +19,10 @@
         <a href="/dugnad/person/persons"><spring:message
 				code="menu.persons" /></a>
     </li>
+   <li>
+        <a href="/dugnad/association/associations"><spring:message
+				code="menu.associations" /></a>
+    </li>
     <li><a href="<c:url value="/j_spring_security_logout" />"><spring:message code="menu.logOut" /></a></li>
     
 </ul>

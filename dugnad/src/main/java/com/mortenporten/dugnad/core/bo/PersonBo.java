@@ -40,4 +40,10 @@ public interface PersonBo {
 	
 	List<Ticket> getTicketsByFestivalNameAndPersonId(String festivalName, String personId);
 	
+	List<Person> getPersonsWithDutiesInFestival(String festivalName);
+	
+	Map<String,Person> getPersonsWithDutiesInFestivalMap(String festivalName);
+	
+	void deleteAssociation(String associationId);
+	
 }

@@ -105,6 +105,21 @@ public class TicketBoImpl implements TicketBo {
 		Festival festival = festivalBo.findFestivalByName(festivalName);
 		return ticketDao.getTicketsByFestivalId(Integer.toString(festival.getFestivalId()));
 	}
+
+	@Override
+	@Transactional
+	public void deleteTicketsByFestival(String festivalId) {
+		for(Ticket t : getAllTickets()){
+			if(Integer.toString(t.getFestival().getFestivalId()).equals(festivalId)){
+				for(Person p : t.getPersons()){
+					p.getTickets().remove(t);
+				}
+				deleteTicket(Integer.toString(t.getTicketId()));
+			}
+		}
+		
+	}
+	
 	
 
 }

@@ -1,6 +1,7 @@
 package com.mortenporten.dugnad.core.bo.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -199,6 +200,54 @@ public class PersonBoImpl implements PersonBo {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Person> getPersonsWithDutiesInFestival(String festivalName) {
+		ArrayList<Person> persons = new ArrayList<Person>();
+		List<Duty> duties = festivalBo.getAllDuties(festivalName);
+		for(Duty d : duties){
+			for(Person p: d.getPersons()){
+				if(!persons.contains(p)){
+					persons.add(p);
+				}
+			}
+		}
+		Collections.sort(persons);
+		return persons;
+		
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Map<String, Person> getPersonsWithDutiesInFestivalMap(
+			String festivalName) {
+		Map<String, Person> personsInfo = new LinkedHashMap<String, Person>();
+		List<Person> persons = getPersonsWithDutiesInFestival(festivalName);
+		
+		//Collections.sort(persons);
+		
+		for(Person p: persons){
+			//personsInfo.put(Integer.toString(p.getPersonId()),"	 " + p.getLastName() + ", " 
+			//		+ p.getFirstName() + "   -   " + p.getEmail());
+			personsInfo.put(Integer.toString(p.getPersonId()), p);
+		}
+		
+		return personsInfo;
+	}
+
+	@Override
+	public void deleteAssociation(String associationId) {
+		for(Person p : findAllPersons()){
+			if(p.getAssociation() != null){
+				if(Integer.toString(p.getAssociation().getAssociationId()).equals(associationId)){
+					p.setAssociation(null);
+					updatePerson(p);
+				}
+			}
+		}
+		
 	}
 	
 	

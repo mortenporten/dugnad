@@ -34,6 +34,10 @@ public class AssociationBoImpl implements AssociationBo {
 	@Override
 	@Transactional
 	public void deleteAssociation(String associationId) {
+		Association association = findAssociationById(associationId);
+		association.getAssociationPersons().clear();
+		updateAssociation(association);
+		personBo.deleteAssociation(associationId);
 		associationDao.deleteAssociation(associationId);
 		
 	}

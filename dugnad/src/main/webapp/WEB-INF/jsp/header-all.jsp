@@ -9,6 +9,7 @@
 </h1>
 
 <ul class="topnav">
+
     <li><a href="/dugnad/index"><spring:message code="menu.home" /></a></li>
     <li>
         <a href="/dugnad/festival/festivals"><spring:message
@@ -18,15 +19,15 @@
         <a href="/dugnad/person/persons"><spring:message
 				code="menu.persons" /></a>
     </li>
+     <li>
+        <a href="/dugnad/association/associations"><spring:message
+				code="menu.associations" /></a>
+    </li>
     <li>
     	<a href=><spring:message
 				code="menu.elements" /></a>
     
     <ul class="subnav">
-    		<li>
-        		<a href="/dugnad/association/associations"><spring:message
-					code="menu.associations" /></a>
-    		</li>
     		<li>
         		<a href="/dugnad/${festivalName}/duty/duties"><spring:message
 					code="menu.duties" /></a>
@@ -57,7 +58,7 @@
 	</li>
     
     <li><a href="<c:url value="/j_spring_security_logout" />"><spring:message code="menu.logOut" /></a></li>
-    <li>
+   <li><div class="" style="color:grey;position:absolute;left:0px;width:140px;">${festivalName}</div></li>
 </ul>
 
 <script type="text/javascript">

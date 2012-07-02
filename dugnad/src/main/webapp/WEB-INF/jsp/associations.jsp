@@ -50,7 +50,7 @@
 <body>
 <div class="container"> 
  
- 	<%@ include file="/WEB-INF/jsp/header-all.jsp" %>
+ 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
 
 
 <div  class="span-21 append-bottom">

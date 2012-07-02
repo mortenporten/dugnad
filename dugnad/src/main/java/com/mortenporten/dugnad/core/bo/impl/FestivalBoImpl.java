@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mortenporten.dugnad.core.bo.FestivalBo;
+import com.mortenporten.dugnad.core.bo.PaidBo;
+import com.mortenporten.dugnad.core.bo.TicketBo;
 import com.mortenporten.dugnad.core.dao.FestivalDao;
 import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Festival;
@@ -25,6 +27,10 @@ public class FestivalBoImpl implements FestivalBo {
 
 	@Autowired
 	FestivalDao festivalDao;
+	@Autowired
+	PaidBo paidBo;
+	@Autowired
+	TicketBo ticketBo;
 	
 	@Override
 	@Transactional
@@ -36,6 +42,8 @@ public class FestivalBoImpl implements FestivalBo {
 	@Override
 	@Transactional
 	public void deleteFestival(String festivalId) {
+		paidBo.deleteAllPaidByFestival(festivalId);
+		ticketBo.deleteTicketsByFestival(festivalId);
 		festivalDao.deleteFestival(festivalId);
 		
 	}

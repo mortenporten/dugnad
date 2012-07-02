@@ -19,6 +19,6 @@ public interface TicketBo {
 	void updateTicket(Ticket ticket);
 	Map<String,String> getMapOfTicketsForFestival(String festivalName);
 	List<Ticket> getTicketsByFestival(String festivalName);
-	
+	void deleteTicketsByFestival(String festivalId);
 
 }

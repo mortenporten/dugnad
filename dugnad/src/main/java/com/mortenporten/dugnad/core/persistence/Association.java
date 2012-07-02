@@ -47,7 +47,7 @@ public class Association implements Serializable {
 		this.associationName = associationName;
 	}
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany()
 	@LazyCollection(LazyCollectionOption.FALSE)
 	public Collection<Person> getAssociationPersons() {
 		return associationPersons;

@@ -68,4 +68,16 @@ public class PaidBoImpl implements PaidBo{
 		return null;
 	}
 
+	@Override
+	@Transactional
+	public void deleteAllPaidByFestival(String festivalId) {
+		for(Paid p : getAllPaid()){
+			if(Integer.toString(p.getFestival().getFestivalId()).equals(festivalId)){
+				p.getPerson().getReceipts().remove(p);
+				deletePaid(Integer.toString(p.getPaidId()));
+			}
+		}
+		
+	}
+
 }

@@ -27,7 +27,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "Person")
-public class Person implements java.io.Serializable {
+public class Person implements java.io.Serializable, Comparable<Person> {
 
 	
 	/**
@@ -43,6 +43,7 @@ public class Person implements java.io.Serializable {
 	private Collection<Ticket> tickets;
 	private Association association;
 	private Collection<Paid> receipts;
+	private Boolean mailSent;
 
 
 	@Id
@@ -144,7 +145,28 @@ public class Person implements java.io.Serializable {
 	public void setReceipts(Collection<Paid> receipts) {
 		this.receipts = receipts;
 	}
+
+	@Column(name = "MailSent")
+	public Boolean getMailSent() {
+		return mailSent;
+	}
+
+
+	public void setMailSent(Boolean mailSent) {
+		this.mailSent = mailSent;
+	}
 	
+	@Override
+	public int compareTo(Person person) {
+		int result = this.lastName.compareTo(person.lastName);
+		if(result == 0){
+			result = this.firstName.compareTo(person.firstName);
+			if(result == 0){
+				result = this.telephone.compareTo(person.telephone);
+			}
+		}
+		return result;
+	}
 	
 	
 }

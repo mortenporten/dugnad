@@ -28,10 +28,10 @@
 	<div class="container">
 
 	<%@ include file="/WEB-INF/jsp/header-all.jsp" %>
-
+<div class="span-20">
 		<h2><spring:message code="header.available.duties"/></h2>
 		<h3><spring:message code="header.choose.day"/></h3>
-		
+	</div>	
 		<div class="span-20">
 		
 		

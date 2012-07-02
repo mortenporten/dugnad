@@ -73,7 +73,7 @@ public class Paid implements java.io.Serializable {
 		this.person = person;
 	}
 
-	@OneToOne 
+	@OneToOne() 
 	public Festival getFestival() {
 		return festival;
 	}

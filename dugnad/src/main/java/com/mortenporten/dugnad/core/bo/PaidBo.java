@@ -16,5 +16,6 @@ public interface PaidBo {
 	void updatePaid(Paid paid);
 	List<Paid> getPaidByFestival(String festivalName);
 	Paid findPaidByFestivalAndPerson(String festivalName, String personId);
+	void deleteAllPaidByFestival(String festivalId);
 
 }
