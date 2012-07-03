@@ -1,7 +1,27 @@
 
 <html>
 <body>
-<h3>Hei ${person} du har blitt satt opp på blablalb</h3>
+<h3>Hei ${person}, du har blitt satt opp på følgende vakter</h3>
+
+<tr>
+    <th>Navn</th>
+    <th>Sted</th>
+    <th>Dato</th>
+    <th>Timer</th>
+    <th>Ansvarlig</th>
+</tr>
+#foreach($d in ${duties})
+<tr>
+        <td>${d.name}</td>
+        <td>${d.place}</td>
+	   	<td>${d.start.time}</td>
+        <td>${d.hours}</td>
+        <td>${d.responsible.firstName} ${d.responsible.lastName}</td>
+ </tr>
+ <tr>
+ <td><b>Beskrivelse:</b>${d.description}</td>
+ </tr>
+#end
 
 
 </body>

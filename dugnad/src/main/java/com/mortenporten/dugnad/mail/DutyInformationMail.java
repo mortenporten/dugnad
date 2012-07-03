@@ -1,6 +1,7 @@
 package com.mortenporten.dugnad.mail;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -15,6 +16,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
+import com.mortenporten.dugnad.core.persistence.Duty;
 import com.mortenporten.dugnad.core.persistence.Person;
 
 @Async
@@ -27,7 +29,7 @@ public class DutyInformationMail {
 	VelocityEngine velocityEngine;
 	
 	
-	public void sendMail(String person){
+	public void sendMail(String person, List<Duty> duties){
 		MimeMessage message = mailSender.createMimeMessage();
 
 	
@@ -35,8 +37,10 @@ public class DutyInformationMail {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			helper.setTo("morteniporten@gmail.com");
             helper.setFrom("morten.hoeiland@gmail.com"); 
+            helper.setSubject("Oppsatte vakter");
             Map model = new HashMap();
             model.put("person", person);
+            model.put("duties", duties);
             String text = VelocityEngineUtils.mergeTemplateIntoString(
                velocityEngine, "/vm/hello.vm", model);
             helper.setText(text, true);

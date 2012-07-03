@@ -35,7 +35,6 @@ public class DutyMailInformationController {
     public String listPersons(@PathVariable("festivalName")
 	String festivalName, ModelMap map) {
  
-       //dutyInformationMail.sendMail("morten h");
 		map.put("persons",personBo.getPersonsWithDutiesInFestival(festivalName));
 		map.put("list",new MailingList());
 		
@@ -55,9 +54,14 @@ public class DutyMailInformationController {
 			}
 				
 		}
-	    	
+		
+		
+		dutyInformationMail.sendMail("morten",personBo.findAllDutiesForPersonForFestival("6", festivalName));
+		
+		map.put("persons",personBo.getPersonsWithDutiesInFestival(festivalName));
+		map.put("list",new MailingList());
 	 
-	        return "redirect:mailPersons";
+	        return "mailPersons";
 	    }
 	
 }
